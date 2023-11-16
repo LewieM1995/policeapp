@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import './lnglat.css';
+import './styles.css';
 import { Button } from 'react-bootstrap';
+import Navbar from './Navbar';
 
 
 function LngLat ( {setData, date, handleDate, selectedValue} ) {
@@ -58,31 +59,58 @@ function LngLat ( {setData, date, handleDate, selectedValue} ) {
       userLat: Object.values(coordinates.userLat),
       userLng: Object.values(coordinates.userLng),
     };
-    console.log(coordsArray)
-
+    //console.log(coordsArray)
+    if (selectedValue === 'Stop&Search'){
     fetch('http://localhost:4000/location', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({coordinates: coordsArray, date: date, searchType: selectedValue}),
+      body: JSON.stringify({coordinates: coordsArray, date: date}),
       })
       .then((res) => res.json())
       .then((data) => {
-        console.log('Server Res', data);
+        //console.log('Server Res', data);
         setData(data);
       })
       .catch((error) => {
         console.error('Error', error)
       });
+    } else if (selectedValue === 'CrimeByLocation'){
+      const singleCoords = {
+        userLat: [lat1],
+        userLng: [lng1],
+      };
+
+      fetch('http://localhost:4000/crimebylocation', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({coordinates: singleCoords, date: date, searchType: selectedValue}),
+      })
+      .then((res) => res.json())
+      .then((data) => {
+        //console.log('Server Res', data);
+        setData(data);
+      })
+      .catch((error) => {
+        console.error('Error', error)
+      });
+    }
   };
+
+  /* <RadioButton selectedValue={selectedValue} radioButtonOptions={radioButtonOptions} handleRadioChange={handleRadioChange} /> */
 
 
   return (
-    <form>
+    <>
+    <Navbar />
     <h1 style={{textAlign: 'center'}}>United Kingdom Crime Stats</h1>
+    <p style={{textAlign: 'center'}}>Work in Progress. Some dates will be slow to load.</p>
     <p style={{textAlign: 'center', fontSize: '25px'}}>You must enter either one pair or 3+ pairs. Enter a date or it will default to 2023-05</p>
-    <p style={{textAlign: 'center', fontSize: '25px'}}>You might find <a href='https://www.keene.edu/campus/maps/tool/' >this</a> useful </p>
+    <p style={{textAlign: 'center', fontSize: '25px'}}>You might find <a href='https://www.keene.edu/campus/maps/tool/' >this</a> useful. Expand Pairs by Selecting Stop & Search </p>
+    <form>
       <div className='co-ords-wrapper'>
         <div className="co-ords-container">
           <label>Latitude 1:</label>
@@ -90,7 +118,8 @@ function LngLat ( {setData, date, handleDate, selectedValue} ) {
           <label>Longitude 1:</label>
           <input type="number" value={lng1}  onChange={handleLng1} placeholder='-0.4861'/>
         </div>
-        <div className="co-ords-container">
+          <>
+          <div className="co-ords-container">
           <label>Latitude 2:</label>
           <input type="number"  value={lat2}  onChange={handleLat2} placeholder='51.3409'/>
           <label>Longitude 2:</label>
@@ -114,13 +143,15 @@ function LngLat ( {setData, date, handleDate, selectedValue} ) {
           <label>Longitude 5:</label>
           <input type="number"  value={lng5}  onChange={handleLng5} placeholder='-0.4916'/>
         </div>
+        </>
         <div className="co-ords-container">
-            <label>Date</label>
-            <input type='text' placeholder='YYYY-MM' value={date} onChange={handleDate}/>
-            <Button onClick={handleSubmit}>Search</Button>
+          <label>Date</label>
+          <input type='text' placeholder='YYYY-MM' value={date} onChange={handleDate}/>
+          <Button onClick={handleSubmit}>Search</Button>
         </div>
       </div>
     </form>
+    </>
   )
 }
 

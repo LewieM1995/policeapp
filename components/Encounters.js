@@ -1,40 +1,41 @@
-import DataTable from './DataTable';
-import { useState } from 'react';
 
 function Encounters ({data}) {
-    
-
-    const [currentPage, setCurrentPage] = useState(1);
-    const handlePageChange = (newPage) => {
-        setCurrentPage(newPage);
-      };
-    const pageSize = 5;
-    const totalPagesMath = data && data.uniqueStreet ? Math.ceil(data.uniqueStreet.length / pageSize / 5) : 0;
 
   return (
     <div className='encounters'> 
-        { data && (<p style={{textAlign: 'center', paddingTop: '1rem'}}> {data.males} males and {data.females} females were stop and searched during the month  {data.date.split('-').reverse().join('-')} </p>)}
-        { data && (<DataTable currentPage={currentPage} items={data.uniqueStreet} onPageChange={handlePageChange} totalPages={totalPagesMath} />)}
-        <div style={{display: 'flex', justifyContent: 'center'}}>{data && (
+        { data && data.date && (<p style={{textAlign: 'center', paddingTop: '1rem'}}> {data.males} males and {data.females} females were stop and searched during the month  {data.date.split('-').reverse().join('-')} </p>)}
+        <div style={{width: '1000px', margin:'auto', display: 'flex', justifyContent: 'center'}}>{data && data.date && (
           <>
-          <ul style={{width: '500px'}}>
-          <label style={{ width: '500px', textAlign: 'center' }} >Reasons for Stops</label>
-            {data.uniqueSearchObj
-              .filter(item => item)
+          <ul className="ul-styles">
+          <label><strong>Reason for Stops:</strong></label>
+            {data.searchObjectCount
+              .filter(item => item.outcome)
               .map((item, index) => (
-              <li key={index}>{item}</li>
+              <li key={index}>{item.outcome}: {item.count}</li>
             ))}
           </ul>
           </>
         )}
-        {data && (
+        {data && data.date && (
           <>
-          <ul >
-          <label style={{ width: '500px', textAlign: 'center' }} >Outcome of Stops</label>
+          <ul className="ul-styles" >
+          <label><strong>Outcome of Stops:</strong></label>
             {data.outcomeWithCounts
               .filter(item => item.outcome)
               .map((item, index) => (
-              <li key={index}>{item.outcome} ({item.count})</li>
+              <li key={index}>{item.outcome}: {item.count}</li>
+            ))}
+          </ul>
+          </>
+        )}
+        {data && data.date && (
+          <>
+          <ul className='ul-styles'>
+          <label><strong>Ethnicity:</strong></label>
+            {data.ethnicityCount
+              .filter(item => item.outcome)
+              .map((item, index) => (
+              <li key={index}>{item.outcome}: {item.count}</li>
             ))}
           </ul>
           </>
