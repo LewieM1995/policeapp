@@ -1,8 +1,10 @@
-import ForceFetch from "../components/ForceFetch";
-import Output from "../components/OutputForForceSearch";
+'use client'
 import { useState, useEffect } from "react";
-import '../components/styles.css';
-import Navbar from "../components/Navbar";
+
+// Component Imports and Styles
+import './components/styles.css'
+import ForceFetch from './components/FetchForce';
+import Output from "./components/OutputForForceSearch";
 
 
 export default function Byforce() {
@@ -43,10 +45,10 @@ export default function Byforce() {
     fetchData();
   }, []);
 
+
+
   return (
-    <main>
-      <Navbar />
-      <br/>
+    <main id="page-wrapper">
       <ForceFetch
         date={date}
         data={listData}

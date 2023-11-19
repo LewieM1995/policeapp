@@ -1,4 +1,3 @@
-import './pagination.css'
 
 const Pagination = ({ itemsPerPage, totalItems, currentPage, paginate }) => {
     const pageNumbers = [];

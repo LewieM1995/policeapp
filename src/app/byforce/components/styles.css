@@ -1,0 +1,96 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin: 10px ;
+}
+  
+.pagination span {
+    flex-grow: 1;
+    text-align: center;
+    margin: 1px 5px;
+    cursor: pointer;
+}
+  
+.pagination span.active {
+    font-weight: bold;
+    background-color: lightblue;
+}
+
+.form {
+    width: 100%;
+    margin: auto;
+}
+
+.form-inside {
+    width: 100%;
+    margin: 5px auto 10px auto;
+    display: flex; 
+    justify-content: center;
+}
+
+.form-inside-date {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.form-inside-date input {
+    width: 130px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+
+
+.stat-container {
+    width: 90%;
+    margin: auto auto 20px auto;
+    text-align: center;
+}
+
+#output-wrapper .object-list {
+   list-style: none; 
+   padding: 0px 10px 10px 10px;
+   margin: 5px 5px 5px 5px;
+   border-radius: 10px;
+}
+
+.object-list-item {
+   background-color: rgb(255, 255, 255);
+   padding: 10px;
+   margin-bottom: 10px;
+   gap: 10px;
+   border-radius: 10px;
+}
+
+.object-list-item h4{
+    margin: 0px 0px 10px 0px;
+}
+
+.pagination-container {
+    width: 50%;
+    margin: auto auto;
+ }
+
+ .list-items { 
+    list-style: none;
+    background-color: rgba(214, 230, 240, 0.5);
+    border-radius: 10px;
+    padding: 5px;
+    box-shadow: 0px 1px 5px 1px rgb(151, 168, 179);
+ }
+
+@media (min-width: 991px){
+    #output-wrapper .object-list {
+        width: 30%;
+        margin: auto auto;
+     }
+     .pagination-container {
+        width: 50%;
+        margin: auto auto;
+     }
+     .form-inside {
+        width: 30%;
+    }
+}
+

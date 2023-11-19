@@ -40,7 +40,7 @@ const calculateOutcomePercentage = (data) => {
     let nullOutcomesPercentage = (nullCount / totalOutcomes) * 100;
   
     return (
-      <div>
+      <>
         <p>Total Outcomes: {totalOutcomes}</p>
         <p>
           Item Found: {trueCount} ({truePercentage.toFixed(2)}%)
@@ -49,10 +49,10 @@ const calculateOutcomePercentage = (data) => {
           Suspect Cleared: {falseCount} ({falsePercentage.toFixed(2)}%)
         </p>
         <p>
-          Null Outcomes: {nullCount} ({nullOutcomesPercentage.toFixed(2)}%)
+          Outcomes undocumented: {nullCount} ({nullOutcomesPercentage.toFixed(2)}%)
         </p>
-        <p>Results of found items: {formattedOutcomes}</p>
-      </div>
+        <p>Results from found items: {formattedOutcomes}</p>
+      </>
     );
   };
   

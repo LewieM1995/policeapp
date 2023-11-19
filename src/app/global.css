@@ -1,0 +1,51 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.css-b62m3t-container {
+    width: 80%;
+    margin: auto;
+}
+
+body {
+    background-color: rgb(230, 229, 229);
+    margin: 0;
+}
+
+.btn {
+  color: rgb(253, 253, 253);
+  border: 1px solid black;
+  border-radius: 5px;
+  height: 25px;
+  width: 150px;
+  background-color: rgba(49, 169, 238, 0.9);
+  cursor: pointer;
+  box-shadow: 0px 4px 10px -3px black;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    transition: all ease-in-out 250ms;
+    box-shadow: -1px 4px 10px -1px black;
+}
+
+.btn.btn-coords {
+    width: 150px;
+    height: 25px;
+    margin-left: 12px;
+    margin-top: 1.3rem;
+}
+
+input {
+    border-radius: 3px;
+    height: 20px;
+    width: 90px;
+    padding-left: 10px;
+    border: 1px rgb(0, 0, 0) solid;
+}
+
+input:focus, input:active {
+    border: 2px rgb(0, 162, 255) solid;
+    outline: none;
+}

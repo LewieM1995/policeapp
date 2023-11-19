@@ -1,0 +1,149 @@
+
+.co-ords-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 5px; 
+    margin: 20px 0px 20px 0px;
+}
+
+.co-ords-container {
+    width: 70%;
+    height: 100px;
+    margin: auto auto;
+}
+
+.co-ords-div-button {
+    width: 50%;
+    height: 100px;
+    margin: auto auto;
+    display: flex;
+    justify-content: center;
+}
+
+.co-ords-container label, input {
+    margin: auto auto;
+    align-self: center;
+    display: flex;
+    width: 100%;
+}
+
+.encounters {
+    height: 420px;
+}
+
+.dropdown-container {
+    width: 100%;
+    margin: 10px auto auto auto;
+}
+
+.title-div {
+  margin-left: 2%;
+  display:flex;
+  align-items: center;
+}
+
+.output-list {
+  list-style: none;
+  padding: 10px;
+}
+
+.nav-ul {
+    list-style: none;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-ul li {
+    margin-bottom: 5px;
+    margin: 5px ;
+}
+
+.nav-li a,
+.title-div a {
+    text-decoration: none;
+    color: aliceblue;
+    margin-right: 15px;
+}
+
+.nav-li a:hover {
+    color: cornflowerblue;
+}
+
+@media (max-width: 375px) {
+    .nav-ul li {
+        font-size: 8px;
+    }
+}
+
+
+@media (min-width: 494px) {
+    .co-ords-wrapper {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); 
+        gap: 5px; 
+        margin: 20px 0px 20px 0px;
+    }
+    .dropdown-container {
+        width: 50%;
+    }
+    .co-ords-container {
+        width: 90%
+    }
+    .co-ords-container input
+    .co-ords-container label {
+        width: 50%
+    }
+}
+
+@media (min-width: 722px) {
+    .co-ords-wrapper {
+        grid-template-columns: repeat(5, 1fr); 
+    }
+    .co-ords-container {
+        width: 70%
+    }
+    .dropdown-container {
+        width: 30%;
+    }
+    .output-list {
+        margin: 10px;
+    }
+    .output-list-container {
+        text-align: center;
+        margin: auto;
+        padding: 10px;
+    }
+}
+
+
+@media (min-width: 858px) {
+    .co-ords-wrapper {
+        grid-template-columns: repeat(6, 1fr); 
+    }
+    .co-ords-container {
+        width: 70%;
+        margin: auto auto;
+    }
+    .co-ords-container label, input {
+        width: 100%;
+        margin: auto auto;
+    }
+}
+
+@media (min-width: 1200px) {
+    .co-ords-wrapper {
+        width: 50%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); 
+        gap: 5px; 
+        margin: 20px auto 20px auto;
+    }
+    .co-ords-container {
+        width: 50%;
+        margin: auto;
+    }
+    .dropdown-container {
+        width: 25%;
+    }
+}
