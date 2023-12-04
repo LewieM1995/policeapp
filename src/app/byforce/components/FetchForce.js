@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import Dropdown from "../../components/Dropdown";
 
-const FetchForce = ({ dropdown, handleDropDown, data, date, setDate, setData }) => {
-  const options = data.map((item) => ({ value: item.id, label: item.name }));
+
+const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData, forcename }) => {
+  const options = listData.map((item) => ({ value: item.id, label: item.name }));
   const [error, setError] = useState("");
+  const [forceLoading, setForceLoading] = useState('');
 
   const handleDate = (e) => {
+    /* Some redundant code previous version of input */
     const inputDate = e.target.value;
     const regex = /^(?:\d{4})-(?:0[1-9]|1[0-2])$/;
 
@@ -14,28 +17,34 @@ const FetchForce = ({ dropdown, handleDropDown, data, date, setDate, setData }) 
     setError(regex.test(inputDate) || inputDate === "" ? "" : "Invalid date format. Please use YYYY-MM.");
   };
 
-  const handleSubmit = (e) => {
+  const handleFunction = (e) => {
+    setForceLoading(null)
     e.preventDefault();
-    fetch(`https://data.police.uk/api/stops-force?force=${dropdown.value}&date=${date}`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
+    {
+      fetch('http://localhost:4000/byforce', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({dropdownvalue: dropdown.value, date: date}),
       })
-      .then((data) => { 
-        //const dataWithIds = data.map((item, index) => ({ id: index + 1, ...item }));
+      .then((res) => res.json())
+      .then((data) => {
+        //console.log('Server Res', data);
         setData(data);
-        console.log(data)
+        setForceLoading(`${forcename} - ${date}`);
+        //console.log('DATA:', data);
       })
       .catch((error) => {
-        console.error("Error fetching data:", error);
+        console.error('Error', error)
       });
+    }
   };
+
 
   return (
     <section id="form-wrapper">
-      <form className='form' onSubmit={handleSubmit}>
+      <form className='form' onSubmit={handleFunction}>
         <div className="form-inside">
           <Dropdown
             options={options}
@@ -56,6 +65,9 @@ const FetchForce = ({ dropdown, handleDropDown, data, date, setDate, setData }) 
         </div>
         <div className="form-inside">
           <button className="btn btn-submit" type="submit">Submit</button>
+        </div>
+        <div style={{textAlign: 'center', marginBottom: '1rem', marginTop:'1rem'}}>
+          <h3>{forceLoading}</h3>
         </div>
       </form>
     </section>

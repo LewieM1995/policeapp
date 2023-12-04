@@ -70,12 +70,49 @@
     color: cornflowerblue;
 }
 
+.burger-menu {
+    display: none; 
+    cursor: pointer;
+    flex-direction: column;
+  }
+  
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+    margin: 5px 0;
+    transition: 0.4s;
+}
+  
+  /* Show the burger menu when the screen is 500px or less */
+@media (max-width: 500px) {
+    .burger-menu {
+      display: flex;
+      margin-left: 7rem;
+    }
+.nav-ul {
+      display: none;
+      flex-direction: column;
+      align-items: flex-end;
+      background: #3e363f;
+      width: 100%;
+      position: absolute;
+      top: 36px; 
+      z-index: 10;
+    }
+    .nav-ul.open {
+      display: flex; 
+    }
+   .nav-li {
+      padding: 10px;
+    }
+  }
+
 @media (max-width: 375px) {
     .nav-ul li {
-        font-size: 8px;
+        font-size: 12px;
     }
 }
-
 
 @media (min-width: 494px) {
     .co-ords-wrapper {
@@ -147,3 +184,5 @@
         width: 25%;
     }
 }
+
+

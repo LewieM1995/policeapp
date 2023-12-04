@@ -2,10 +2,10 @@
 export default function AppInfo() {
   return (
     <>
-        <h1 style={{textAlign: 'center'}}>Stop & Search using Latitude & Longitude</h1>
-        <p style={{textAlign: 'center'}}>Work in Progress. Some dates will be slow to load.</p>
-        <p style={{textAlign: 'center', fontSize: '25px', padding: '10px'}}>You must enter 3+ pairs. Enter a date or it will default to 2023-05</p>
-        <p style={{textAlign: 'center', fontSize: '25px'}}>You might find <a href='https://www.keene.edu/campus/maps/tool/'>this</a> helpful.</p>
+      <h1 style={{textAlign: 'center'}}>Stop & Search using Latitude & Longitude</h1>
+      <p style={{textAlign: 'center'}}>Due to api constraints some dates will be slow to load</p>
+      <p style={{textAlign: 'center', fontSize: '25px', padding: '10px'}}>Default date is 2023-05</p>
+      <p style={{textAlign: 'center', fontSize: '25px'}}>You might find <a href='https://www.keene.edu/campus/maps/tool/' target="_blank">this</a> helpful.</p>
     </>
   )
 }

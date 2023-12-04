@@ -31,7 +31,7 @@ export default function Byforce() {
             return;
           }
         }
-
+        //'http://localhost:4000/byforce'
         const response = await fetch("https://data.police.uk/api/forces");
         const data = await response.json();
         setListData(data);
@@ -45,19 +45,26 @@ export default function Byforce() {
     fetchData();
   }, []);
 
-
+  const forcename = dropdown.value
+  ? `${dropdown.value.charAt(0).toUpperCase()}${dropdown.value.slice(1)}`
+  : '';
 
   return (
     <main id="page-wrapper">
-      <ForceFetch
+     <ForceFetch
+        forcename={forcename}
         date={date}
-        data={listData}
+        listData={listData}
         dropdown={dropdown}
         handleDropDown={setDropDown}
         setDate={setDate}
         setData={setData}
       />
-      <Output data={data} />
+    {data.length === 0 ? <div style={{textAlign:'center'}}>Select a police force and a date</div> : 
+    <>
+    <Output data={data} />
+    </>
+    }  
     </main>
   );
 }

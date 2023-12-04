@@ -6,19 +6,18 @@ import CoordinateInput from './CoordinateInput';
 import AppInfo from './AppInfo';
 
 
-function LngLat ( {setData, date, handleDate} ) {
+function LngLat ( { date, handleDate, setData, setLoading } ) {
 
-  
-  const [lat1, setLat1] = useState('')
-  const [lng1, setLng1] = useState('')
-  const [lat2, setLat2] = useState('')
-  const [lng2, setLng2] = useState('')
-  const [lat3, setLat3] = useState('')
-  const [lng3, setLng3] = useState('')
-  const [lat4, setLat4] = useState('')
-  const [lng4, setLng4] = useState('')
-  const [lat5, setLat5] = useState('')
-  const [lng5, setLng5] = useState('')
+  const [lat1, setLat1] = useState("");
+  const [lng1, setLng1] = useState("");
+  const [lat2, setLat2] = useState("");
+  const [lng2, setLng2] = useState("");
+  const [lat3, setLat3] = useState("");
+  const [lng3, setLng3] = useState("");
+  const [lat4, setLat4] = useState("");
+  const [lng4, setLng4] = useState("");
+  const [lat5, setLat5] = useState("");
+  const [lng5, setLng5] = useState("");
 
   const handleLat1 = (v) => {
     setLat1(v.target.value)
@@ -51,6 +50,34 @@ function LngLat ( {setData, date, handleDate} ) {
     setLng5(v.target.value)
   };
 
+
+  const handleSubmit = () => {
+    setLoading(true);
+    const coordinates = {
+      userLat: [lat1, lat2, lat3, lat4, lat5],
+      userLng: [lng1, lng2, lng3, lng4, lng5],
+    };
+    const coordsArray = {
+      userLat: Object.values(coordinates.userLat),
+      userLng: Object.values(coordinates.userLng),
+    };
+    //console.log(coordsArray)
+    fetch('http://localhost:4000/location', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({coordinates: coordsArray, date: date}),
+      })
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error('Error', error)
+      });
+  };
 
   return (
     <>
@@ -85,7 +112,9 @@ function LngLat ( {setData, date, handleDate} ) {
       <div className="co-ords-container">
         <label>Date: </label>
         <input type='month' placeholder='YYYY-MM' value={date} onChange={handleDate}/>
+        <button className='btn btn-coords' onClick={handleSubmit}>Submit</button>
       </div>
+      
     </div>
   </>
   )

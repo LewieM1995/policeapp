@@ -1,10 +1,10 @@
 import React, { useState } from "react";
+import Link from "next/link";
 
 //Component Imports
 import calculateOutcomePercentage from "./CalcPercentagesEtc";
 import Pagination from "./PaginationButtons";
 import ListItems from "./ListItems";
-import Link from "next/link";
 
 export default function OutputForForceSearch({ data }) {
   const [currentPage, setCurrentPage] = useState(1);
@@ -21,10 +21,10 @@ export default function OutputForForceSearch({ data }) {
   };
 
   const mainList = currentItems.map((item, index) => (
-   
       <div key={index} className="object-list-item">
-        <h4>{item.type}:</h4>
-        <ul className="list-items">
+        <h4>{item.type}: Click to see more</h4>
+        <Link href={`/byforce/${item.id}`} target="_blank" style={{textDecoration:'none'}}>
+        <ul className="list-items" >
           <ListItems label="Age" value={item.age_range} />
           <ListItems label="Ethnicity" value={item.self_defined_ethnicity} />
           <ListItems label="Officer Defined Ethnicity" value={item.officer_defined_ethnicity} />
@@ -33,15 +33,15 @@ export default function OutputForForceSearch({ data }) {
           <ListItems label="Legislation" value={item.legislation} />
           <ListItems label="Outcome" value={item.outcome} />
         </ul>
+        </Link>
       </div>
-    
   ));
 
   return (
     <section >
       <div id="output-wrapper">
         <div className="stat-container">
-          {calculateOutcomePercentage(data)}
+            {calculateOutcomePercentage(data)}
         </div>
         <div className="object-list">
           {data.length === 0 ? (
