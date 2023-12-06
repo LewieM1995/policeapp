@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Dropdown from "../../coordinates/Dropdown";
+import { La_Belle_Aurore } from "next/font/google";
 
 
 const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData, forcename }) => {
