@@ -47,7 +47,7 @@ const Navbar = () => {
       <div style={isBurgerMenuOpen ? burgerMenuStyle : { display: 'flex', alignItems: 'center' }}>
         <ul className={`nav-ul ${isBurgerMenuOpen ? 'open' : ''}`}>
           <li className="nav-li">
-            <Link href="http://localhost:3000" onClick={closeBurgerMenu}>Coordinates</Link>
+            <Link href="http://localhost:3000/coordinates" onClick={closeBurgerMenu}>Coordinates</Link>
           </li>
           <li className="nav-li">
             <Link href="http://localhost:3000/byforce" onClick={closeBurgerMenu}>By Force</Link>
