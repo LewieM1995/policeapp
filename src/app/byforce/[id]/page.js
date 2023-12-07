@@ -57,9 +57,9 @@ export default function Page({ params }) {
           <ListItems label="Operation Name" value={fullData.operation_name} />
           <ListItems label="Outcome" value={fullData.outcome} />
           <ListItems label="Outcome link to reason" value={fullData.outcome_linked_to_obejct_of_search} />
-          <ListItems label="Outcome" value={fullData.removal_of_more_than_outer_clothing} />
+          <ListItems label="Clothing Removal" value={fullData.removal_of_more_than_outer_clothing} />
           <ListItems label="Ethnicity" value={fullData.self_defined_ethnicity} />
-          <ListItems label="Ethnicity" value={fullData.type} />
+          <ListItems label="Type" value={fullData.type} />
         </ul>
       </section>
     </>
