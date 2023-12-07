@@ -19,7 +19,6 @@ async function getDataById(id) {
 
 export default function Page({ params }) {
   const [fullData, setFullData] = useState([]);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
