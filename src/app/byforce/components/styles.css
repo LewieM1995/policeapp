@@ -59,7 +59,7 @@
    padding: 10px;
    margin-bottom: 10px;
    gap: 10px;
-   border-radius: 10px;
+   border-radius: 5px;
 }
 
 .object-list-item h4{
@@ -74,9 +74,14 @@
  .list-items { 
     list-style: none;
     background-color: rgba(214, 230, 240, 0.5);
-    border-radius: 10px;
+    border-radius: 5px;
     padding: 10px;
     box-shadow: 0px 1px 5px 1px rgb(151, 168, 179);
+    color: black;
+ }
+ .list-items:hover { 
+   background-color: rgb(92, 105, 117);
+   color: rgb(240, 233, 233);
  }
 
  .dynamic-section {
