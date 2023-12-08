@@ -111,7 +111,7 @@ function LngLat ( { date, handleDate, setData, setLoading } ) {
     </>
       <div className="co-ords-container">
         <label>Date: </label>
-        <input type='month' placeholder='YYYY-MM' value={date} onChange={handleDate}/>
+        <input style={{backgroundColor:'lightblue'}} type='month' placeholder='YYYY-MM' value={date} onChange={handleDate}/>
         <button className='btn btn-coords' onClick={handleSubmit}>Submit</button>
       </div>
       
