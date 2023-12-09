@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Dropdown from "../../coordinates/Dropdown";
-import { La_Belle_Aurore } from "next/font/google";
 
 
 const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData, forcename }) => {
@@ -22,7 +21,7 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
     setForceLoading(null)
     e.preventDefault();
     {
-      fetch('http://localhost:4000/byforce', {
+      fetch('https://16.171.114.43/byforce', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
