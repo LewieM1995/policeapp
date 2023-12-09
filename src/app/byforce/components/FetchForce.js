@@ -21,7 +21,7 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
     setForceLoading(null)
     e.preventDefault();
     {
-      fetch('https://16.171.114.43/byforce', {
+      fetch('http://localhost:4000/byforce', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

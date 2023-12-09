@@ -6,7 +6,7 @@ import '../components/styles.css';
 
 async function getDataById(id) {
   try {
-    const response = await fetch(`https://16.171.114.43/get-data/${id}`);
+    const response = await fetch(`http://localhost:4000/get-data/${id}`);
     if (!response.ok) {
       throw new Error('Request failed');
     }
