@@ -22,7 +22,7 @@ const Data = ({ data, setData, date }) => {
   useEffect(() => {
     if (city) {
       setLoading(true);
-      fetch('http://3.10.119.254:4000/location', {
+      fetch('https://3.10.119.254:4000/location', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
