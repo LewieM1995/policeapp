@@ -62,7 +62,7 @@ function LngLat ( { date, handleDate, setData, setLoading } ) {
       userLng: Object.values(coordinates.userLng),
     };
     //console.log(coordsArray)
-    fetch('https://policeappsever.duckdns.org:4000/location', {
+    fetch('https://policeappsever.duckdns.org/location', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
