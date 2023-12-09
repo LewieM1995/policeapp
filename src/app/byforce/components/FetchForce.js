@@ -28,7 +28,10 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
       },
       body: JSON.stringify({dropdownvalue: dropdown.value, date: date}),
       })
-      .then((res) => res.json())
+      .then((res) => {
+        console.log('Res:', res);
+        return res.json();
+      })
       .then((data) => {
         //console.log('Server Res', data);
         setData(data);
