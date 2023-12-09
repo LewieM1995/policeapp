@@ -62,7 +62,7 @@ function LngLat ( { date, handleDate, setData, setLoading } ) {
       userLng: Object.values(coordinates.userLng),
     };
     //console.log(coordsArray)
-    fetch('http://3.10.119.254:4000/location', {
+    fetch('https://3.10.119.254:4000/location', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
