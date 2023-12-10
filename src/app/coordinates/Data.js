@@ -22,7 +22,7 @@ const Data = ({ data, setData, date }) => {
   useEffect(() => {
     if (city) {
       setLoading(true);
-      fetch('https://policeappserver.duckdns.org/location', {
+      fetch('https://policeappserver.duckdns.org:4000/location', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
