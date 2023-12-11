@@ -24,7 +24,11 @@ export default function CoordinatesPage() {
     if (dateObject < threeMonthsAgo){
       setDate(inputDate);
     } else {
-      alert("The api isn't always up to date, please try an earlier month")
+      const userConfirmed = window.confirm("The API isn't always up to date. Do you want to proceed?");
+      
+      if (userConfirmed) {
+        setDate(inputDate);
+      }
     }
   };
 
