@@ -10,11 +10,22 @@ import LoadingSpinner from "./LoadingSpinner";
 export default function CoordinatesPage() {
   
   const [data, setData] = useState([]);
-  const [date, setDate] = useState('');
+  const [date, setDate] = useState('2023-01');
   const [loading, setLoading] = useState();
 
   const handleDate = (v) => {
-    setDate(v.target.value)
+    const inputDate =  v.target.value;
+    const currentDate = new Date();
+    const threeMonthsAgo = new Date(currentDate);
+    threeMonthsAgo.setMonth(currentDate.getMonth() - 4);
+
+    const dateObject = new Date(inputDate);
+
+    if (dateObject < threeMonthsAgo){
+      setDate(inputDate);
+    } else {
+      alert("The api isn't always up to date, please try an earlier month")
+    }
   };
 
   return (

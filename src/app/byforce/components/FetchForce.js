@@ -8,15 +8,27 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
   const [forceLoading, setForceLoading] = useState('');
 
   const handleDate = (e) => {
-    /* Some redundant code previous version of input */
+    /* Some redundant code previous version of input 
     const inputDate = e.target.value;
     const regex = /^(?:\d{4})-(?:0[1-9]|1[0-2])$/;
-
     setDate(inputDate);
+    setError(regex.test(inputDate) || inputDate === "" ? "" : "Invalid date format. Please use YYYY-MM."); */
+    const inputDate =  e.target.value;
+    const currentDate = new Date();
+    const threeMonthsAgo = new Date(currentDate);
+    threeMonthsAgo.setMonth(currentDate.getMonth() - 4);
 
-    setError(regex.test(inputDate) || inputDate === "" ? "" : "Invalid date format. Please use YYYY-MM.");
+    const dateObject = new Date(inputDate);
+
+    if (dateObject < threeMonthsAgo){
+      setDate(inputDate);
+    } else {
+      alert("The api isn't always up to date, please try an earlier month")
+    }
   };
 
+
+  //Hide Server name in .env in future
   const handleFunction = (e) => {
     setForceLoading(null)
     e.preventDefault();
