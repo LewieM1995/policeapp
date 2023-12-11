@@ -19,15 +19,12 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
     threeMonthsAgo.setMonth(currentDate.getMonth() - 4);
 
     const dateObject = new Date(inputDate);
-
+    
     if (dateObject < threeMonthsAgo){
       setDate(inputDate);
     } else {
-      const userConfirmed = window.confirm("The API isn't always up to date. Do you want to proceed?");
-      
-      if (userConfirmed) {
-        setDate(inputDate);
-      }
+      const userConfirmed = window.confirm("The API isn't always up to date, more recent dates will likely return an error.");
+      document.body.focus();
     }
   };
 
