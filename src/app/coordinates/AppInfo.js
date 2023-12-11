@@ -2,10 +2,10 @@
 export default function AppInfo() {
   return (
     <>
-      <h2 style={{ textAlign: 'center', fontWeight: '100' }}>
+      <h2 style={{ textAlign: 'center', fontWeight: '500' }}>
         Explore API Stats with Latitude and Longitude Pairs or Choose a Date and Location
       </h2>
-      <p style={{ textAlign: 'center', fontSize: '1.5rem' }}>
+      <p style={{ textAlign: 'center', fontSize: '1.2rem' }}>
         Please note that due to API constraints, some dates may have slower loading times,
         and using two pairs simultaneously might not be supported.
       </p>
