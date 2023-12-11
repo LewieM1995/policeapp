@@ -24,7 +24,7 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
       setDate(inputDate);
     } else {
       window.confirm("The API isn't always up to date, more recent dates will likely return an error.");
-      document.body.focus();
+      document.getElementById('form-wrapper').focus();
     }
   };
 
