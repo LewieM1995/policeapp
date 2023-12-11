@@ -2,14 +2,14 @@
 export default function AppInfo() {
   return (
     <>
-      <h2 style={{ textAlign: 'center' }}>
+      <h2 style={{ textAlign: 'center', fontWeight: '100' }}>
         Explore API Stats with Latitude and Longitude Pairs or Choose a Date and Location
       </h2>
-      <p style={{ textAlign: 'center' }}>
+      <p style={{ textAlign: 'center', fontSize: '1.5rem' }}>
         Please note that due to API constraints, some dates may have slower loading times,
         and using two pairs simultaneously might not be supported.
       </p>
-      <p style={{ textAlign: 'center', fontSize: '1.5rem' }}>
+      <p style={{ textAlign: 'center'}}>
         For assistance with latitude and longitude, consider using these helpful tools:
         {' '}
         <a href='https://www.keene.edu/campus/maps/tool/' target="_blank" rel="noopener noreferrer">Tool One</a>
