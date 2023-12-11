@@ -12,6 +12,7 @@ Consider interactive maps for a more intuitive experience when searching by coor
 Clone the Repository:
 
 git clone https://github.com/LewieM1995/policeapp.git
+
 cd policeap
 
 Install Dependencies:
