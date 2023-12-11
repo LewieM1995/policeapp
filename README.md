@@ -28,4 +28,4 @@ Access the Application:
 Open your browser and navigate to localhost:3000
 
 ## Note
-Ensure that you have Node.js installed before following the above instructions. For more details about the Police API, refer to their documentation at Police API Documentation or provide a link to the specific API you are using.
+Ensure that you have Node.js installed before following the above instructions. For more details about the Police API, refer to their documentation at https://data.police.uk/docs/
