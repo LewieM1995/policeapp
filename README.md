@@ -1,5 +1,5 @@
 ## Project Description
-This Next.js application utilizes the Police API to retrieve data and generate statistics based on longitude and latitude inputs. It features two main pages—one for searching by coordinates (lat/lng) and another for searching by a specific police force. The latter includes a dynamically generated list of police forces from the API, allowing users to visualize the full data object, not just a snippet. This is achieved by caching the data when user requests data from the api.
+This Next.js application utilizes the Police API to retrieve data and generate statistics based on longitude and latitude inputs. It features two main pages— one for searching by coordinates (lat/lng) and another for searching by a specific police force. The latter includes a dynamically generated list of police forces, a caching mechanism and dynamic routing implementation to provide a more detailed look at the data from the api. 
 
 ## Updates for Consideration
 1.Enhanced Statistics: Introduce additional statistical features for a more comprehensive analysis.
