@@ -23,7 +23,7 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
     if (dateObject < threeMonthsAgo){
       setDate(inputDate);
     } else {
-      window.confirm("The API isn't always up to date, more recent dates will likely return an error.");
+      alert("The API isn't always up to date, more recent dates will likely return an error.");
       document.getElementById('form-wrapper').focus();
     }
   };
