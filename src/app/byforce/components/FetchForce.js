@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import Dropdown from "../../coordinates/Dropdown";
+import Datetime from 'react-datetime';
+import "react-datetime/css/react-datetime.css";
+import { Just_Me_Again_Down_Here } from "next/font/google";
+
 
 
 const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData, forcename }) => {
@@ -7,23 +11,23 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
   const [error, setError] = useState("");
   const [forceLoading, setForceLoading] = useState('');
 
-  const handleDate = (e) => {
+  const handleDate = (selectedDate) => {
     /* Some redundant code previous version of input 
     const inputDate = e.target.value;
     const regex = /^(?:\d{4})-(?:0[1-9]|1[0-2])$/;
     setDate(inputDate);
     setError(regex.test(inputDate) || inputDate === "" ? "" : "Invalid date format. Please use YYYY-MM."); */
-    const inputDate =  e.target.value;
     const currentDate = new Date();
     const threeMonthsAgo = new Date(currentDate);
-    threeMonthsAgo.setMonth(currentDate.getMonth() - 4);
+    threeMonthsAgo.setMonth(currentDate.getMonth() - 3);
 
-    const dateObject = new Date(inputDate);
+    const dateObject = new Date(selectedDate);
     
     if (dateObject < threeMonthsAgo){
-      setDate(inputDate);
+      setDate(selectedDate);
+      setError('')
     } else {
-      alert("The API isn't always up to date, more recent dates will likely return an error.");
+      setError("The API isn't always up to date, more recent dates will likely return an error.");
       document.getElementById('dateInput').focus();
     }
   };
@@ -64,21 +68,22 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
         <div className="form-inside">
           <Dropdown
             options={options}
+            initialValue={'2023-03'}
             value={dropdown}
             onChange={handleDropDown}
             getOptionLabel={options}
           />
         </div>
         <div className="form-inside-date" >
-          {error && <div style={errorStyle}>{error}</div>}
           <label>Enter a Date:</label>
-          <input
-            id='dateInput'
-            type="month"
+          <Datetime 
+            dateFormat='YYYY-MM'
+            timeFormat={false}
+            onChange={(selectedDate) => handleDate(selectedDate)}
             value={date}
-            onChange={handleDate}
-            placeholder="YYYY-MM"
+            inputProps={{ id: 'dateInput' }}
           />
+          {error && <div style={errorStyle}>{error}</div>}
         </div>
         <div className="form-inside">
           <button className="btn btn-submit" type="submit">Submit</button>

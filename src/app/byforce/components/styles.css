@@ -34,12 +34,16 @@
     margin-bottom: 10px;
 }
 
-.form-inside-date input {
-    width: 130px;
-    text-align: center;
-    margin-bottom: 10px;
+.rdt input{
+    width: 100px;
+    padding-left: 25px;
 }
 
+.rdt .rdtPicker{
+   margin: auto;
+   position: relative;
+   width: 200px;
+}
 
 .stat-container {
     width: 90%;
