@@ -8,6 +8,7 @@ const Dropdown = ({ options, value, onChange, isDisabled }) => {
       value={value}
       onChange={onChange}
       isDisabled={isDisabled}
+      id='select'
     />
   );
 };
