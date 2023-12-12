@@ -24,7 +24,7 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
       setDate(inputDate);
     } else {
       alert("The API isn't always up to date, more recent dates will likely return an error.");
-      document.getElementById('form-wrapper').focus();
+      document.getElementById('dateInput').focus();
     }
   };
 
@@ -73,6 +73,7 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
           {error && <div style={errorStyle}>{error}</div>}
           <label>Enter a Date:</label>
           <input
+            id='dateInput'
             type="month"
             value={date}
             onChange={handleDate}
