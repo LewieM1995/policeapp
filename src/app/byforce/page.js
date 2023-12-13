@@ -10,9 +10,10 @@ import Output from "./components/OutputForForceSearch";
 export default function Byforce() {
 
   const [dropdown, setDropDown] = useState("");
-  const [date, setDate] = useState('2023-03');
+  const [date, setDate] = useState();
   const [listData, setListData] = useState([]);
   const [data, setData] = useState([]);
+  console.log(date);
 
   useEffect(() => {
     const fetchData = async () => {

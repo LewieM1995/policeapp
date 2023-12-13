@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Dropdown from "../../coordinates/Dropdown";
 import Datetime from 'react-datetime';
 import "react-datetime/css/react-datetime.css";
-import { Just_Me_Again_Down_Here } from "next/font/google";
 
 
 
@@ -24,7 +23,8 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
     const dateObject = new Date(selectedDate);
     
     if (dateObject < threeMonthsAgo){
-      setDate(selectedDate);
+      const formattedDate = `${dateObject.getFullYear()}-${(dateObject.getMonth() + 1).toString().padStart(2, '0')}`;
+      setDate(formattedDate);
       setError('')
     } else {
       setError("The API isn't always up to date, more recent dates will likely return an error.");
@@ -75,6 +75,7 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
           />
         </div>
         <div className="form-inside-date" >
+        {error && <div style={errorStyle}>{error}</div>}
           <label>Enter a Date:</label>
           <Datetime 
             dateFormat='YYYY-MM'
@@ -83,7 +84,6 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
             value={date}
             inputProps={{ id: 'dateInput' }}
           />
-          {error && <div style={errorStyle}>{error}</div>}
         </div>
         <div className="form-inside">
           <button className="btn btn-submit" type="submit">Submit</button>

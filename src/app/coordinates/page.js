@@ -12,29 +12,28 @@ export default function CoordinatesPage() {
   const [data, setData] = useState([]);
   const [date, setDate] = useState('2023-01');
   const [loading, setLoading] = useState();
+  const [error, setError] = useState();
 
-  const handleDate = (v) => {
-    const inputDate =  v.target.value;
+  const handleDate = (selectedDate) => {
     const currentDate = new Date();
     const threeMonthsAgo = new Date(currentDate);
-    threeMonthsAgo.setMonth(currentDate.getMonth() - 4);
+    threeMonthsAgo.setMonth(currentDate.getMonth() - 3);
 
-    const dateObject = new Date(inputDate);
-
+    const dateObject = new Date(selectedDate);
+    
     if (dateObject < threeMonthsAgo){
-      setDate(inputDate);
+      const formattedDate = `${dateObject.getFullYear()}-${(dateObject.getMonth() + 1).toString().padStart(2, '0')}`;
+      setDate(formattedDate);
+      setError('')
     } else {
-      const userConfirmed = window.confirm("The API isn't always up to date. Do you want to proceed?");
-      
-      if (userConfirmed) {
-        setDate(inputDate);
-      }
+      setError("The API isn't always up to date, more recent dates will likely return an error.");
+      document.getElementById('dateInput').focus();
     }
   };
 
   return (
     <main id="page-wrapper">
-      <LngLat data={data} setData={setData} date={date} handleDate={handleDate} setLoading={setLoading} />
+      <LngLat data={data} setData={setData} date={date} handleDate={handleDate} setLoading={setLoading} error={error} setError={setError} />
       {loading ? (
         <>
         <LoadingSpinner />
@@ -48,3 +47,4 @@ export default function CoordinatesPage() {
 }
 
 const loadingStyle = { textAlign: 'center', paddingTop: '5px' };
+
