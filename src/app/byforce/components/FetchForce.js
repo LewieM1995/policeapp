@@ -3,6 +3,7 @@ import Dropdown from "../../coordinates/Dropdown";
 import Datetime from 'react-datetime';
 import "react-datetime/css/react-datetime.css";
 import LoadingSpinner from "../../../../shared components/LoadingSpinner";
+import './styles.css';
 
 
 
