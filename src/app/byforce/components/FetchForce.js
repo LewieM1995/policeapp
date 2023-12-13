@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import Dropdown from "../../coordinates/Dropdown";
 import Datetime from 'react-datetime';
 import "react-datetime/css/react-datetime.css";
+import LoadingSpinner from "../../../../shared components/LoadingSpinner";
 
 
 
 const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData, forcename }) => {
   const options = listData.map((item) => ({ value: item.id, label: item.name }));
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const [forceLoading, setForceLoading] = useState('');
 
   const handleDate = (selectedDate) => {
@@ -27,7 +29,7 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
       setDate(formattedDate);
       setError('')
     } else {
-      setError("The API isn't always up to date, more recent dates will likely return an error.");
+      setError("The API isn't always up to date, use a date earlier in the year.");
       document.getElementById('dateInput').focus();
     }
   };
@@ -35,7 +37,8 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
 
   //Hide Server name in .env in future
   const handleFunction = (e) => {
-    setForceLoading(null)
+    setForceLoading(null);
+    setLoading(true);
     e.preventDefault();
     {
       fetch('https://policeappserver.duckdns.org:4000/byforce', {
@@ -53,6 +56,7 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
         //console.log('Server Res', data);
         setData(data);
         setForceLoading(`${forcename} - ${date}`);
+        setLoading(false);
         //console.log('DATA:', data);
       })
       .catch((error) => {
@@ -89,7 +93,7 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
           <button className="btn btn-submit" type="submit">Submit</button>
         </div>
         <div style={{textAlign: 'center', marginBottom: '1rem', marginTop:'1rem'}}>
-          <h3>{forceLoading}</h3>
+          {loading ? (<LoadingSpinner/>) : <h3>{forceLoading}</h3>}
         </div>
       </form>
     </section>

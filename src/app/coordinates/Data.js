@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './styles.css';
 import Dropdown from './Dropdown';
 import Encounters from './Encounters';
-import LoadingSpinner from './LoadingSpinner';
+import LoadingSpinner from '../../../shared components/LoadingSpinner';
 
 const Data = ({ data, setData, date }) => {
   const [city, setCity] = useState('');

@@ -4,15 +4,16 @@
 import { useState } from "react";
 import Data from "./Data";
 import LngLat from "./LngLat";
-import LoadingSpinner from "./LoadingSpinner";
+import LoadingSpinner from "../../../shared components/LoadingSpinner";
 
 
 export default function CoordinatesPage() {
   
   const [data, setData] = useState([]);
-  const [date, setDate] = useState('2023-01');
+  const [date, setDate] = useState();
   const [loading, setLoading] = useState();
   const [error, setError] = useState();
+  console.log(date)
 
   const handleDate = (selectedDate) => {
     const currentDate = new Date();
@@ -26,7 +27,7 @@ export default function CoordinatesPage() {
       setDate(formattedDate);
       setError('')
     } else {
-      setError("The API isn't always up to date, more recent dates will likely return an error.");
+      setError("The API isn't always up to date, use a date earlier in the year.");
       document.getElementById('dateInput').focus();
     }
   };
