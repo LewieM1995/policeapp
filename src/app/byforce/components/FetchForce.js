@@ -30,7 +30,7 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
       setError('')
     } else {
       setError("The API isn't always up to date, use a date earlier in the year.");
-      document.getElementById('dateInput').focus();
+      document.getElementById('form-wrapper').focus();
     }
   };
 

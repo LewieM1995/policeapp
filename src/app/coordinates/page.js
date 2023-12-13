@@ -28,7 +28,7 @@ export default function CoordinatesPage() {
       setError('')
     } else {
       setError("The API isn't always up to date, use a date earlier in the year.");
-      document.getElementById('dateInput').focus();
+      document.getElementById('page-wrapper').focus();
     }
   };
 
