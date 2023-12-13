@@ -3,7 +3,7 @@ import Dropdown from "../../coordinates/Dropdown";
 import Datetime from 'react-datetime';
 import "react-datetime/css/react-datetime.css";
 import LoadingSpinner from "../../../../shared components/LoadingSpinner";
-import './styles.css';
+
 
 
 
@@ -35,35 +35,37 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
     }
   };
 
-
-  //Hide Server name in .env in future
+  const isFormValid = () => {
+    return dropdown.value && date;
+  };
+  
   const handleFunction = (e) => {
     setForceLoading(null);
     setLoading(true);
     e.preventDefault();
-    {
+    if (isFormValid()){
       fetch('https://policeappserver.duckdns.org:4000/byforce', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({dropdownvalue: dropdown.value, date: date}),
-      })
-      .then((res) => {
-        console.log('Res:', res);
-        return res.json();
-      })
-      .then((data) => {
-        //console.log('Server Res', data);
-        setData(data);
-        setForceLoading(`${forcename} - ${date}`);
-        setLoading(false);
-        //console.log('DATA:', data);
-      })
-      .catch((error) => {
-        console.error('Error', error)
-      });
-    }
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({dropdownvalue: dropdown.value, date: date}),
+        })
+        .then((res) => {
+          console.log('Res:', res);
+          return res.json();
+        })
+        .then((data) => {
+          //console.log('Server Res', data);
+          setData(data);
+          setForceLoading(`${forcename} - ${date}`);
+          setLoading(false);
+          //console.log('DATA:', data);
+        })
+        .catch((error) => {
+          console.error('Error', error)
+        });
+      } 
   };
 
 

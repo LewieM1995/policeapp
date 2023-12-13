@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 
 // Component Imports and Styles
-import './components/styles.css'
+import './components/styles.css';
 import ForceFetch from './components/FetchForce';
 import Output from "./components/OutputForForceSearch";
 
@@ -13,8 +13,7 @@ export default function Byforce() {
   const [date, setDate] = useState();
   const [listData, setListData] = useState([]);
   const [data, setData] = useState([]);
-  console.log(date);
-
+  
   useEffect(() => {
     const fetchData = async () => {
       try {

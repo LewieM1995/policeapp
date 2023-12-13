@@ -13,7 +13,6 @@ export default function CoordinatesPage() {
   const [date, setDate] = useState();
   const [loading, setLoading] = useState();
   const [error, setError] = useState();
-  console.log(date)
 
   const handleDate = (selectedDate) => {
     const currentDate = new Date();

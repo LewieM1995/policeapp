@@ -55,6 +55,10 @@ function LngLat ( { date, handleDate, setData, setLoading, error} ) {
   };
 
 
+  const isFormValid = () => {
+    return dropdown.value && date;
+  };
+
   const handleSubmit = () => {
     setLoading(true);
     const coordinates = {
@@ -65,8 +69,8 @@ function LngLat ( { date, handleDate, setData, setLoading, error} ) {
       userLat: Object.values(coordinates.userLat),
       userLng: Object.values(coordinates.userLng),
     };
-    //console.log(coordsArray)
-    fetch('https://policeappserver.duckdns.org:4000/location', {
+    if (isFormValid()){
+      fetch('https://policeappserver.duckdns.org:4000/location', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -81,6 +85,7 @@ function LngLat ( { date, handleDate, setData, setLoading, error} ) {
       .catch((error) => {
         console.error('Error', error)
       });
+    }
   };
 
 return (
