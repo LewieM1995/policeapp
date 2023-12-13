@@ -17,17 +17,23 @@ export default function CoordinatesPage() {
   const handleDate = (selectedDate) => {
     const currentDate = new Date();
     const threeMonthsAgo = new Date(currentDate);
-    threeMonthsAgo.setMonth(currentDate.getMonth() - 3);
-
-    const dateObject = new Date(selectedDate);
     
-    if (dateObject < threeMonthsAgo){
+    if (currentDate.getMonth() < 3) {
+      threeMonthsAgo.setFullYear(currentDate.getFullYear() - 1);
+      threeMonthsAgo.setMonth(currentDate.getMonth() + 9);
+    } else {
+      threeMonthsAgo.setMonth(currentDate.getMonth() - 3);
+    }
+  
+    const dateObject = new Date(selectedDate);
+  
+    if (dateObject < threeMonthsAgo) {
       const formattedDate = `${dateObject.getFullYear()}-${(dateObject.getMonth() + 1).toString().padStart(2, '0')}`;
       setDate(formattedDate);
-      setError('')
+      setError('');
     } else {
       setError("The API isn't always up to date, use a date earlier in the year.");
-      document.getElementById('page-wrapper').focus();
+      document.getElementById('form-wrapper').focus();
     }
   };
 

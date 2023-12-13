@@ -19,21 +19,29 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
     const regex = /^(?:\d{4})-(?:0[1-9]|1[0-2])$/;
     setDate(inputDate);
     setError(regex.test(inputDate) || inputDate === "" ? "" : "Invalid date format. Please use YYYY-MM."); */
+
     const currentDate = new Date();
     const threeMonthsAgo = new Date(currentDate);
-    threeMonthsAgo.setMonth(currentDate.getMonth() - 3);
-
-    const dateObject = new Date(selectedDate);
     
-    if (dateObject < threeMonthsAgo){
+    if (currentDate.getMonth() < 3) {
+      threeMonthsAgo.setFullYear(currentDate.getFullYear() - 1);
+      threeMonthsAgo.setMonth(currentDate.getMonth() + 9); 
+    } else {
+      threeMonthsAgo.setMonth(currentDate.getMonth() - 3);
+    }
+  
+    const dateObject = new Date(selectedDate);
+  
+    if (dateObject < threeMonthsAgo) {
       const formattedDate = `${dateObject.getFullYear()}-${(dateObject.getMonth() + 1).toString().padStart(2, '0')}`;
       setDate(formattedDate);
-      setError('')
+      setError('');
     } else {
       setError("The API isn't always up to date, use a date earlier in the year.");
       document.getElementById('form-wrapper').focus();
     }
   };
+  
 
   const isFormValid = () => {
     return dropdown.value && date;
