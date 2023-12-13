@@ -7,7 +7,7 @@ export default function AppInfo() {
       </h2>
       <p style={{ textAlign: 'center', fontSize: '1.2rem', padding: '20px' }}>
         Please note that due to API constraints, some dates may have slower loading times,
-        and using two pairs simultaneously is not be supported.
+        and using two pairs simultaneously is not supported.
       </p>
       <p style={{ textAlign: 'center', padding: '20px'}}>
         For assistance with latitude and longitude, consider using these tools:
