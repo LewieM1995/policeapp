@@ -90,7 +90,7 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
           />
         </div>
         <div className="form-inside">
-          <button className="btn btn-submit" type="submit">Submit</button>
+          <button className="btn" type="submit">Submit</button>
         </div>
         <div style={{textAlign: 'center', marginBottom: '1rem', marginTop:'1rem'}}>
           {loading ? (<LoadingSpinner/>) : <h3>{forceLoading}</h3>}
