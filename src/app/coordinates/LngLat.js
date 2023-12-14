@@ -55,7 +55,7 @@ function LngLat ( { date, handleDate, setData, setLoading, error} ) {
   };
 
 
-  const isFormValid = () => {
+  const isFormValid = (coordinates) => {
     return coordinates && coordinates.length >= 1 && date;
   };
 
@@ -69,7 +69,7 @@ function LngLat ( { date, handleDate, setData, setLoading, error} ) {
       userLat: Object.values(coordinates.userLat),
       userLng: Object.values(coordinates.userLng),
     };
-    if (isFormValid()){
+    if (isFormValid(coordinates)){
       fetch('https://policeappserver.duckdns.org:4000/location', {
       method: 'POST',
       headers: {
