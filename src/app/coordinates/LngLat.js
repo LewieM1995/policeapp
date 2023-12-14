@@ -56,7 +56,7 @@ function LngLat ( { date, handleDate, setData, setLoading, error} ) {
 
 
   const isFormValid = () => {
-    return dropdown.value && date;
+    return (dropdown.value && date) || (coordinates && coordinates.length >= 2 && date);
   };
 
   const handleSubmit = () => {
