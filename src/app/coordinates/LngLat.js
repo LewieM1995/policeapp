@@ -69,23 +69,26 @@ function LngLat ( { date, handleDate, setData, setLoading, error} ) {
       userLat: Object.values(coordinates.userLat),
       userLng: Object.values(coordinates.userLng),
     };
-    if (isFormValid(coordinates)){
-      fetch('https://policeappserver.duckdns.org:4000/location', {
+    if (isFormValid(coordinates)) {
+    fetch('https://policeappserver.duckdns.org:4000/location', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({coordinates: coordsArray, date: date}),
-      })
+      body: JSON.stringify({ coordinates: coordsArray, date: date }),
+    })
       .then((res) => res.json())
       .then((data) => {
         setData(data);
-        setLoading(false);
       })
       .catch((error) => {
-        console.error('Error', error)
+        console.error('Error', error);
+      })
+      .finally(() => {
         setLoading(false);
       });
+    } else {
+      setLoading(false);
     }
   };
 
