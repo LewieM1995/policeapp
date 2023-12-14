@@ -84,6 +84,7 @@ function LngLat ( { date, handleDate, setData, setLoading, error} ) {
       })
       .catch((error) => {
         console.error('Error', error)
+        setLoading(false);
       });
     }
   };
