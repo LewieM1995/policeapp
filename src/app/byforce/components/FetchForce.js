@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Dropdown from "../../coordinates/Dropdown";
 import Datetime from 'react-datetime';
 import "react-datetime/css/react-datetime.css";
@@ -40,6 +40,7 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
       setError("The API isn't always up to date, use a date earlier in the year.");
       document.getElementById('form-wrapper').focus();
     }
+
   };
   
 
@@ -98,6 +99,7 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
             onChange={(selectedDate) => handleDate(selectedDate)}
             value={date}
             inputProps={{ id: 'dateInput' }}
+            closeOnSelect={true}
           />
         </div>
         <div className="form-inside">

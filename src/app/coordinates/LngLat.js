@@ -122,7 +122,9 @@ return (
           timeFormat={false}
           onChange={(selectedDate) => handleDate(selectedDate)}
           value={date}
-          inputProps={{ id: 'dateInput' }} />
+          inputProps={{ id: 'dateInput' }} 
+          closeOnSelect={true}
+          />
         <button className='btn btn-coords' onClick={handleSubmit}>Submit</button>
       </div>
     </div>
