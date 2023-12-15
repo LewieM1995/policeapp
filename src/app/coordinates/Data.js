@@ -46,6 +46,7 @@ const Data = ({ data, setData, date }) => {
   return (
     <section className='dropdown&output-section'>
       <h3 style={headerStyle}>Choose a City/Town from the dropdown or Enter your own Latitude & Longitude above</h3>
+      <p style={headerStyle}>(London has a lot of date to parse)</p>
       <div className='dropdown-container'>
         <Dropdown
           options={location}

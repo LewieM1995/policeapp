@@ -5,8 +5,6 @@ import "react-datetime/css/react-datetime.css";
 import LoadingSpinner from "../../../../shared components/LoadingSpinner";
 
 
-
-
 const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData, forcename }) => {
   const options = listData.map((item) => ({ value: item.id, label: item.name }));
   const [error, setError] = useState("");

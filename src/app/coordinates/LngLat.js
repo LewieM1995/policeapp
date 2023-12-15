@@ -8,10 +8,8 @@ import CoordinateInput from './CoordinateInput';
 import AppInfo from './AppInfo';
 
 
-function LngLat ( { date, handleDate, setData, setLoading, error} ) {
+const LngLat = ({ date, handleDate, setData, setLoading, error}) =>  {
 
-
-  
   const [lat1, setLat1] = useState("");
   const [lng1, setLng1] = useState("");
   const [lat2, setLat2] = useState("");
