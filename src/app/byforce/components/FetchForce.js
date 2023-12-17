@@ -51,7 +51,7 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
     setLoading(true);
     e.preventDefault();
     if (isFormValid()){
-      fetch('https://policeappserver.duckdns.org:4000/byforce', {
+      fetch('https://policeappserver.duckdns.org:4000/policeapp/byforce', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

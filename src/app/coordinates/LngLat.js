@@ -72,7 +72,7 @@ const LngLat = ({ date, handleDate, setData, setLoading, error}) =>  {
     };
 
     if (isFormValid(coordinates)) {
-      const response = await fetch('https://policeappserver.duckdns.org:4000/location', {
+      const response = await fetch('https://policeappserver.duckdns.org:4000/policeapp/location', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
