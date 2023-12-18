@@ -28,7 +28,7 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
       threeMonthsAgo.setMonth(currentDate.getMonth() - 3);
     }
 
-    const october2020 = new Date('2020-10');
+    const october2020 = new Date('2020-11');
     const dateObject = new Date(selectedDate);
   
     if (dateObject < threeMonthsAgo && dateObject >= october2020) {
@@ -36,10 +36,13 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
       setDate(formattedDate);
       setError('');
     } else {
-      setError("The API isn't always up to date, use a date earlier in the year.");
-      document.getElementById('form-wrapper').focus();
+        if (dateObject < october2020) {
+        setError("Choose a date on or after November 2020.");
+      } else {
+        setError("The API isn't always up to date, use a date earlier in the year.");
+      }
+    document.getElementById('form-wrapper').focus();
     }
-
   };
   
 
