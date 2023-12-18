@@ -27,10 +27,11 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
     } else {
       threeMonthsAgo.setMonth(currentDate.getMonth() - 3);
     }
-  
+
+    const october2020 = new Date('2020-10');
     const dateObject = new Date(selectedDate);
   
-    if (dateObject < threeMonthsAgo) {
+    if (dateObject < threeMonthsAgo && dateObject >= october2020) {
       const formattedDate = `${dateObject.getFullYear()}-${(dateObject.getMonth() + 1).toString().padStart(2, '0')}`;
       setDate(formattedDate);
       setError('');
