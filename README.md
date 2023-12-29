@@ -18,9 +18,6 @@ cd policeap
 Install Dependencies:
 npm install
 
-Create an Environment File:
-Create a .env.local file at the root and store any private variables.
-
 Run the Development Server:
 npm run dev
 
