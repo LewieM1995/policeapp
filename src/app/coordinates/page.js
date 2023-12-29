@@ -7,7 +7,7 @@ import LngLat from "./LngLat";
 import LoadingSpinner from "../../../shared components/LoadingSpinner";
 
 
-export default function CoordinatesPage() {
+const CoordinatesPage = () => {
   
   const [data, setData] = useState([]);
   const [date, setDate] = useState();
@@ -54,3 +54,4 @@ export default function CoordinatesPage() {
 
 const loadingStyle = { textAlign: 'center', paddingTop: '5px' };
 
+export default CoordinatesPage;

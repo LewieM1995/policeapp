@@ -6,7 +6,7 @@ import calculateOutcomePercentage from "./CalcPercentagesEtc";
 import Pagination from "./PaginationButtons";
 import ListItems from "./ListItems";
 
-export default function OutputForForceSearch({ data }) {
+const OutputForForceSearch = ({ data }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
@@ -64,3 +64,5 @@ export default function OutputForForceSearch({ data }) {
 }
 
 const noDataStyle = { textAlign:'center', color: "red" };
+
+export default OutputForForceSearch;

@@ -1,7 +1,7 @@
 import './styles.css'
 
 
-export default function CoordinateInput ({ label1, value1, onChange1, placeholder1, label2, value2, onChange2, placeholder2 }) {
+const CoordinateInput = ({ label1, value1, onChange1, placeholder1, label2, value2, onChange2, placeholder2 }) => {
 
  return (
     <>
@@ -14,3 +14,5 @@ export default function CoordinateInput ({ label1, value1, onChange1, placeholde
   </>
  )   
 };
+
+export default CoordinateInput;

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import './global.css';
 
-export default function Home() {
+const Home = () => {
   
 
   return (
@@ -18,6 +18,8 @@ export default function Home() {
         <Link className="center-nav" href='/coordinates'>Try Coordinates page</Link>
       </div>
     </main>
-  )
-}
+  );
+};
+
+export default Home;
 

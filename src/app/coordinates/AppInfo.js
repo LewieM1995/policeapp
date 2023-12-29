@@ -1,5 +1,5 @@
 
-export default function AppInfo() {
+const AppInfo = () => {
   return (
     <>
       <h2 style={{ textAlign: 'center', fontWeight: '500', padding: '20px' }}>
@@ -21,5 +21,8 @@ export default function AppInfo() {
         <em>(Disclaimer: I am not associated with these sites in any way.)</em>
       </p>
     </>
-  )
-}
+  );
+};
+
+
+export default AppInfo;

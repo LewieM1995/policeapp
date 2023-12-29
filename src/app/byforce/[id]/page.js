@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import ListItems from "../components/ListItems";
 import '../components/styles.css';
 
-async function getDataById(id) {
+const getDataById = async (id) => {
   try {
     const response = await fetch(`https://policeappserver.duckdns.org:4000/policeapp/get-data/${id}`);
     if (!response.ok) {
@@ -17,7 +17,7 @@ async function getDataById(id) {
   }
 }
 
-export default function Page({ params }) {
+const Page = ({ params }) => {
   const [fullData, setFullData] = useState([]);
 
   useEffect(() => {
@@ -64,3 +64,4 @@ export default function Page({ params }) {
     </>
   );
 }
+ export default Page;

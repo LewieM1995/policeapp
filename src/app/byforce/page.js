@@ -7,7 +7,7 @@ import ForceFetch from './components/FetchForce';
 import Output from "./components/OutputForForceSearch";
 
 
-export default function Byforce() {
+const Byforce = () => {
 
   const [dropdown, setDropDown] = useState("");
   const [date, setDate] = useState();
@@ -67,3 +67,5 @@ export default function Byforce() {
     </main>
   );
 }
+
+export default Byforce;
