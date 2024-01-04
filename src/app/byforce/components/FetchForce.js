@@ -13,7 +13,7 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
 
   const handleDate = (selectedDate) => {
     const currentDate = new Date();
-    const minDate = new Date('2020-11');
+    const minDate = new Date('2020-12');
     const inputDate = new Date(selectedDate);
 
     if (inputDate <= currentDate && inputDate >= minDate) {
@@ -24,7 +24,7 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
       if (inputDate > currentDate) {
         setError("Cannot select a date in the future.");
       } else if (inputDate < minDate) {
-        setError("Please choose a date on or after November 2020.");
+        setError("Please choose a date on or after December 2020.");
       }
       //removing focus - testing 
       //document.getElementById('dateInput').focus();
