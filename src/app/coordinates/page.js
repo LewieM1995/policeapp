@@ -16,24 +16,21 @@ const CoordinatesPage = () => {
 
   const handleDate = (selectedDate) => {
     const currentDate = new Date();
-    const threeMonthsAgo = new Date(currentDate);
-    
-    if (currentDate.getMonth() < 3) {
-      threeMonthsAgo.setFullYear(currentDate.getFullYear() - 1);
-      threeMonthsAgo.setMonth(currentDate.getMonth() + 9);
-    } else {
-      threeMonthsAgo.setMonth(currentDate.getMonth() - 3);
-    }
-  
-    const dateObject = new Date(selectedDate);
-  
-    if (dateObject < threeMonthsAgo) {
-      const formattedDate = `${dateObject.getFullYear()}-${(dateObject.getMonth() + 1).toString().padStart(2, '0')}`;
+    const minDate = new Date('2020-12');
+    const inputDate = new Date(selectedDate);
+
+    if (inputDate <= currentDate && inputDate >= minDate) {
+      const formattedDate = `${inputDate.getFullYear()}-${(inputDate.getMonth() + 1).toString().padStart(2, '0')}`;
       setDate(formattedDate);
       setError('');
     } else {
-      setError("The API isn't always up to date, use a date earlier in the year.");
-      document.getElementById('form-wrapper').focus();
+      if (inputDate > currentDate) {
+        setError("Cannot select a date in the future.");
+      } else if (inputDate < minDate) {
+        setError("Please choose a date on or after December 2020.");
+      }
+      //removing focus - testing 
+      //document.getElementById('dateInput').focus();
     }
   };
 
