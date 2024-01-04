@@ -16,7 +16,7 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
     const threeMonthsAgo = new Date(currentDate);
     threeMonthsAgo.setMonth(currentDate.getMonth() - 3);
   
-    const minDate = new Date('2021-12');
+    const minDate = new Date('2020-12');
     const inputDate = new Date(selectedDate);
 
     if (
@@ -30,10 +30,8 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
     } else {
       if (inputDate > currentDate) {
         setError("Cannot select a date in the future.");
-      } else if (inputDate < minDate) {
-        setError("Please choose a date on or after December 2021.");
-      } else {
-        setError("Please choose a date within the last three months.");
+      } else (inputDate < minDate) {
+        setError("Please choose a date on or after December 2020.");
       }
       document.getElementById('form-wrapper').focus();
     }
