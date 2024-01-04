@@ -29,7 +29,6 @@ const CoordinatesPage = () => {
       } else if (inputDate < minDate) {
         setError("Please choose a date on or after December 2020.");
       }
-      //removing focus - testing 
       //document.getElementById('dateInput').focus();
     }
   };
