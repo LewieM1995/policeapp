@@ -26,7 +26,8 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
       } else if (inputDate < minDate) {
         setError("Please choose a date on or after November 2020.");
       }
-      document.getElementById('dateInput').focus();
+      //removing focus - testing 
+      //document.getElementById('dateInput').focus();
     }
   };
 
