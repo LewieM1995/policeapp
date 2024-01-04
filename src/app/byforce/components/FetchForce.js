@@ -32,8 +32,6 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
         setError("Cannot select a date in the future.");
       } else if (inputDate < minDate) {
         setError("Please choose a date on or after December 2020.");
-      } else {
-        setError("More recent dates might not be included in the API yet");
       }
       document.getElementById('form-wrapper').focus();
     }
