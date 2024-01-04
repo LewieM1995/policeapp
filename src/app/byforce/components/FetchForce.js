@@ -12,39 +12,32 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
   const [forceLoading, setForceLoading] = useState('');
 
   const handleDate = (selectedDate) => {
-    /* Some redundant code previous version of input 
-    const inputDate = e.target.value;
-    const regex = /^(?:\d{4})-(?:0[1-9]|1[0-2])$/;
-    setDate(inputDate);
-    setError(regex.test(inputDate) || inputDate === "" ? "" : "Invalid date format. Please use YYYY-MM."); */
-
     const currentDate = new Date();
     const threeMonthsAgo = new Date(currentDate);
-    
-    if (currentDate.getMonth() < 3) {
-      threeMonthsAgo.setFullYear(currentDate.getFullYear() - 1);
-      threeMonthsAgo.setMonth(currentDate.getMonth() + 9); 
-    } else {
-      threeMonthsAgo.setMonth(currentDate.getMonth() - 3);
-    }
-
-    const dec2020 = new Date('2020-12');
-    const dateObject = new Date(selectedDate);
+    threeMonthsAgo.setMonth(currentDate.getMonth() - 3);
   
-    if (dateObject < threeMonthsAgo && dateObject >= dec2020) {
-      const formattedDate = `${dateObject.getFullYear()}-${(dateObject.getMonth() + 1).toString().padStart(2, '0')}`;
+    const minDate = new Date('2021-12');
+    const inputDate = new Date(selectedDate);
+
+    if (
+      inputDate <= currentDate && // Check if the selected date is current or in the future
+      inputDate >= minDate && // Check if the selected date is on or after December 2021
+      inputDate > threeMonthsAgo // Check if the selected date is not within the past three months
+    ) {
+      const formattedDate = `${inputDate.getFullYear()}-${(inputDate.getMonth() + 1).toString().padStart(2, '0')}`;
       setDate(formattedDate);
       setError('');
     } else {
-        if (dateObject < dec2020) {
-        setError("Choose a date on or after January 2021.");
+      if (inputDate > currentDate) {
+        setError("Cannot select a date in the future.");
+      } else if (inputDate < minDate) {
+        setError("Please choose a date on or after December 2021.");
       } else {
-        setError("The API isn't always up to date, use a date earlier in the year or previous years.");
+        setError("Please choose a date within the last three months.");
       }
-    document.getElementById('form-wrapper').focus();
+      document.getElementById('form-wrapper').focus();
     }
-  };
-  
+};
 
   const isFormValid = () => {
     return dropdown.value && date;
