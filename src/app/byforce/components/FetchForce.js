@@ -37,9 +37,9 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
       setError('');
     } else {
         if (dateObject < october2020) {
-        setError("Choose a date on or after November 2020.");
+        setError("Choose a date on or after January 2021.");
       } else {
-        setError("The API isn't always up to date, use a date earlier in the year.");
+        setError("The API isn't always up to date, use a date earlier in the year or previous years.");
       }
     document.getElementById('form-wrapper').focus();
     }
