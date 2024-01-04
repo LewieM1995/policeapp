@@ -28,15 +28,15 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
       threeMonthsAgo.setMonth(currentDate.getMonth() - 3);
     }
 
-    const october2020 = new Date('2020-11');
+    const dec2020 = new Date('2020-12');
     const dateObject = new Date(selectedDate);
   
-    if (dateObject < threeMonthsAgo && dateObject >= october2020) {
+    if (dateObject < threeMonthsAgo && dateObject >= dec2020) {
       const formattedDate = `${dateObject.getFullYear()}-${(dateObject.getMonth() + 1).toString().padStart(2, '0')}`;
       setDate(formattedDate);
       setError('');
     } else {
-        if (dateObject < october2020) {
+        if (dateObject < dec2020) {
         setError("Choose a date on or after January 2021.");
       } else {
         setError("The API isn't always up to date, use a date earlier in the year or previous years.");
