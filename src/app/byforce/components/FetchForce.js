@@ -56,6 +56,7 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.json();
+        setData(data);
         //console.log("Data array:", data);
         const dateConfirm = data[0].date || data[0].datetime.slice(0, 7);
         //console.log("Date:", dateConfirm);
