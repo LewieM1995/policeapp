@@ -17,7 +17,7 @@ const Encounters = ({ data, date}) => {
   return (
     <div className='encounters'>
     <br/>
-    <p style={{textAlign:'center'}}>{date === "2024-01" ? <p>Date may default to 2023-11 if the API hasn't updated current month</p> : null }</p>
+    <p style={{textAlign:'center'}}>{date === "2024-01" ? "Date may default to 2023-11 if the API hasn't updated current month" : null }</p>
       {data && data.date && (
         <p style={centeredStyle}>
           {data.males} males and {data.females} females were stop and searched during the month {data.date}.
