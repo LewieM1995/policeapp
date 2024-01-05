@@ -56,9 +56,10 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.json();
-        setData(data);
-        setForceLoading(`${forcename} - ${date}`);
-        //console.log(data);
+        //console.log("Data array:", data);
+        const formattedDate = data[0].date || (data[0].datetime ? data[0].datetime.slice(0, 7) : null);
+        //console.log("Formatted Date:", formattedDate);
+        setForceLoading(`${forcename} - ${formattedDate}`);
       }
     } catch (error) {
       console.error('Error:', error);
