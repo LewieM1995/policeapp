@@ -57,7 +57,7 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
         }
         const data = await response.json();
         //console.log("Data array:", data);
-        const formattedDate = data[0].date || (data[0].datetime ? data[0].datetime.slice(0, 7) : null);
+        const formattedDate = data[0].date || data[0].datetime.slice(0, 7);
         //console.log("Formatted Date:", formattedDate);
         setForceLoading(`${forcename} - ${formattedDate}`);
       }
