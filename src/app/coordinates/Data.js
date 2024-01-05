@@ -7,6 +7,7 @@ import LoadingSpinner from '../../../shared components/LoadingSpinner';
 const Data = ({ data, setData, date }) => {
   const [city, setCity] = useState('');
   const [loading, setLoading] = useState();
+  const [error, setError] = useState(null);
 
   const location = [
     { label: 'London', lat: [51.5890, 51.3409, 51.3957, 51.6452, 51.58901], lng: [-0.4861, -0.4586, 0.3543, 0.2664, -0.4916] },
@@ -20,28 +21,40 @@ const Data = ({ data, setData, date }) => {
   };
 
   useEffect(() => {
-    if (city) {
-      setLoading(true);
-      fetch('https://policeappserver.duckdns.org:4000/policeapp/location', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          city: city,
-          date: date,
-        }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
+    const fetchData = async () => {
+      try {
+        if (city) {
+          setLoading(true);
+          const response = await fetch('https://policeappserver.duckdns.org:4000/policeapp/location', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              city: city,
+              date: date,
+            }),
+          });
+  
+          console.log('Res:', response);
+  
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+  
+          const data = await response.json();
           setData(data);
-          setLoading(false);
-        })
-        .catch((error) => {
-          console.error('Error', error);
-        });
-    }
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+  
+    fetchData();
   }, [city]);
+  
 
   return (
     <section className='dropdown&output-section'>
@@ -54,6 +67,7 @@ const Data = ({ data, setData, date }) => {
           onChange={handleCity}
         />
       </div>
+      {!error ? <p style={{textAlign:'center'}} >{error}</p> : null}
       {loading ? (
         <>
         <LoadingSpinner />

@@ -8,7 +8,7 @@ import CoordinateInput from './CoordinateInput';
 import AppInfo from './AppInfo';
 
 
-const LngLat = ({ date, handleDate, setData, setLoading, error}) =>  {
+const LngLat = ({ date, handleDate, setData, setLoading, error, setError}) =>  {
 
   const [lat1, setLat1] = useState("");
   const [lng1, setLng1] = useState("");

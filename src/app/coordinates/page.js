@@ -16,7 +16,7 @@ const CoordinatesPage = () => {
 
   const handleDate = (selectedDate) => {
     const currentDate = new Date();
-    const minDate = new Date('2020-12');
+    const minDate = new Date(2020, 12);
     const inputDate = new Date(selectedDate);
 
     if (inputDate <= currentDate && inputDate >= minDate) {
@@ -27,7 +27,7 @@ const CoordinatesPage = () => {
       if (inputDate > currentDate) {
         setError("Cannot select a date in the future.");
       } else if (inputDate < minDate) {
-        setError("Please choose a date on or after December 2020.");
+        setError("Please choose a date on or after January 2021.");
       }
       //document.getElementById('dateInput').focus();
     }
