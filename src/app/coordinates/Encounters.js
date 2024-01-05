@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Encounters = ({ data }) => {
+const Encounters = ({ data, date}) => {
   //const formatDate = (date) => date.split('-').reverse().join('-');
 
   const renderList = (list, label) => (
@@ -16,9 +16,11 @@ const Encounters = ({ data }) => {
 
   return (
     <div className='encounters'>
+    <br/>
+    <p style={{textAlign:'center'}}>{date === "2024-01" ? <p>Date may default to 2023-11 if the API hasn't updated current month</p> : null }</p>
       {data && data.date && (
         <p style={centeredStyle}>
-          {data.males} males and {data.females} females were stop and searched during the month {data.date === "2023-11" ? `${data.date} - defaulted to prevent error`: data.date}.
+          {data.males} males and {data.females} females were stop and searched during the month {data.date}.
         </p>
       )}
       <div className='output-list-container'>

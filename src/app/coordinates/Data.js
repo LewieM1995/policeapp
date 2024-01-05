@@ -74,7 +74,7 @@ const Data = ({ data, setData, date }) => {
         <h2 style={loadingStyle}>Loading...</h2>
         </>
       ) : (
-        <Encounters data={data} />
+        <Encounters data={data} date={date} />
       )}
     </section>
   );
