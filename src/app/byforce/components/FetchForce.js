@@ -57,10 +57,8 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
         }
         const data = await response.json();
         setData(data);
-        //console.log("Data array:", data);
-        const dateConfirm = data[0].date || data[0].datetime.slice(0, 7);
-        //console.log("Date:", dateConfirm);
-        setForceLoading(`${forcename} - ${dateConfirm}`);
+        console.log(data);
+        setForceLoading(`${forcename} - ${data.datetime}`);
       }
     } catch (error) {
       console.error('Error:', error);
