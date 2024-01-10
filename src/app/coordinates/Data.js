@@ -1,12 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './styles.css';
 import Dropdown from './Dropdown';
 import Encounters from './Encounters';
-import LoadingSpinner from '../../../shared components/LoadingSpinner';
+
 
 const Data = ({ data, setData, date }) => {
+  
   const [city, setCity] = useState('');
-  const [loading, setLoading] = useState();
+  const [loading, setLoading] = useState({
+    overall: false,
+    outcomeWithCounts: false,
+    searchObjectCount: false,
+    ethnicityCount: false,
+  });
   const [error, setError] = useState(null);
 
   const location = [
@@ -24,8 +30,18 @@ const Data = ({ data, setData, date }) => {
     const fetchData = async () => {
       try {
         if (city) {
-          setLoading(true);
-          const response = await fetch('https://policeappserver.duckdns.org:4000/policeapp/location', {
+          if (loading.overall) {
+            setData({
+              males: 0,
+              females: 0,
+              date: '',
+              searchObjectCount: [],
+              outcomeWithCounts: [],
+              ethnicityCount: [],
+            });
+          }
+          setLoading(prevLoading => ({...prevLoading, overall: true, outcomeWithCounts: true, searchObjectCount: true, ethnicityCount: true, }));
+          const response = await fetch('http://localhost:4000/location', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -36,24 +52,58 @@ const Data = ({ data, setData, date }) => {
             }),
           });
   
-          console.log('Res:', response);
-  
           if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
           }
   
-          const data = await response.json();
-          setData(data);
+          const reader = response.body.getReader();
+          let partialData = '';
+  
+          while (true) {
+            const { done, value } = await reader.read();
+  
+            if (done) {
+              break;
+            }
+  
+            const chunk = typeof value === 'string' ? value : new TextDecoder().decode(value);
+  
+            partialData += chunk;
+  
+            if (chunk.endsWith('\n')) {
+              try {
+                const jsonData = JSON.parse(partialData.trim());
+                setData(prevData => ({ ...prevData, ...jsonData }));
+                if (jsonData.outcomeWithCounts) {
+                  setLoading(prevLoading => ({ ...prevLoading, outcomeWithCounts: false }));
+                }
+                if (jsonData.searchObjectCount) {
+                  setLoading(prevLoading => ({ ...prevLoading, searchObjectCount: false }));
+                }
+                if (jsonData.ethnicityCount) {
+                  setLoading(prevLoading => ({ ...prevLoading, ethnicityCount: false }));
+                }
+
+                partialData = '';
+              } catch (error) {
+                console.error('Error parsing JSON:', error);
+                console.log('Problematic JSON chunk:', partialData);
+              }
+            }
+          }
         }
       } catch (error) {
         console.error('Error:', error);
       } finally {
-        setLoading(false);
+        setLoading(prevLoading => ({ ...prevLoading, overall: false }));
       }
     };
   
     fetchData();
   }, [city]);
+  
+  
+  
   
 
   return (
@@ -67,20 +117,12 @@ const Data = ({ data, setData, date }) => {
           onChange={handleCity}
         />
       </div>
-      {!error ? <p style={{textAlign:'center'}} >{error}</p> : null}
-      {loading ? (
-        <>
-        <LoadingSpinner />
-        <h2 style={loadingStyle}>Loading...</h2>
-        </>
-      ) : (
-        <Encounters data={data} date={date} />
-      )}
+        <Encounters data={data} date={date} error={error} loading={loading}/>
     </section>
   );
 };
 
 const headerStyle = { margin: 'auto', width: '90%', textAlign: 'center' };
-const loadingStyle = { textAlign: 'center', paddingTop: '5px' };
+
 
 export default Data;
