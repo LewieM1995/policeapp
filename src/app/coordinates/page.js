@@ -9,7 +9,14 @@ import LoadingSpinner from "../../../shared components/LoadingSpinner";
 
 const CoordinatesPage = () => {
   
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({
+    males: 0,
+    females: 0,
+    searchObjectCount: [],
+    outcomeWithCounts: [],
+    ethnicityCount: [],
+    date: '',
+  });
   const [date, setDate] = useState();
   const [loading, setLoading] = useState();
   const [error, setError] = useState();
