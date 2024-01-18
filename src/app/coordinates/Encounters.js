@@ -21,7 +21,7 @@ const Encounters = ({ data, date, loading }) => {
     <p style={{textAlign:'center'}}>{date === "2024-01" ? "Date may default to 2023-11 if the API hasn't updated current month" : null }</p>
       {!loading.searchObjectCount ? (
         <p style={centeredStyle}>
-          {data.males} males and {data.females} females were stop and searched during the month {data.date}.
+         {data.males} males and {data.females} females were stop and searched during the month {data.date}
         </p>
       ) : (null)}
       <div className='output-list-container'>
@@ -47,11 +47,3 @@ const centeredStyle = { textAlign: 'center', margin: '10px 10px 10px 10px' };
 const loadingStyle = { textAlign: 'center', paddingTop: '5px' };
 
 export default Encounters;
-
-/* {!error ? <p style={{textAlign:'center'}} >{error}</p> : null}
-{loading ? (
-  <>
-  <LoadingSpinner />
-  <h2 style={loadingStyle}>Loading...</h2>
-  </>
-) : ( */

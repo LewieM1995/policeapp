@@ -4,7 +4,6 @@
 import { useState } from "react";
 import Data from "./Data";
 import LngLat from "./LngLat";
-import LoadingSpinner from "../../../shared components/LoadingSpinner";
 
 
 const CoordinatesPage = () => {
@@ -17,8 +16,15 @@ const CoordinatesPage = () => {
     ethnicityCount: [],
     date: '',
   });
+
+  const [loading, setLoading] = useState({
+    overall: false,
+    outcomeWithCounts: false,
+    searchObjectCount: false,
+    ethnicityCount: false,
+  });
+  
   const [date, setDate] = useState();
-  const [loading, setLoading] = useState();
   const [error, setError] = useState();
 
   const handleDate = (selectedDate) => {
@@ -42,19 +48,11 @@ const CoordinatesPage = () => {
 
   return (
     <main id="page-wrapper">
-      <LngLat data={data} setData={setData} date={date} handleDate={handleDate} setLoading={setLoading} error={error} setError={setError} />
-      {loading ? (
-        <>
-        <LoadingSpinner />
-        <h2 style={loadingStyle}>Loading...</h2>
-        </>
-      ) : (
-        <Data data={data} setData={setData} date={date}/>
-      )}
+      <LngLat data={data} setData={setData} date={date} handleDate={handleDate} error={error} setError={setError} loading={loading} setLoading={setLoading} />
+      <Data data={data} setData={setData} date={date} loading={loading} setLoading={setLoading} />
     </main>
   )
 }
 
-const loadingStyle = { textAlign: 'center', paddingTop: '5px' };
 
 export default CoordinatesPage;
