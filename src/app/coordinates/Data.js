@@ -1,18 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './styles.css';
 import Dropdown from './Dropdown';
 import Encounters from './Encounters';
 
 
-const Data = ({ data, setData, date }) => {
+const Data = ({ data, setData, date, loading, setLoading }) => {
   
   const [city, setCity] = useState('');
-  const [loading, setLoading] = useState({
-    overall: false,
-    outcomeWithCounts: false,
-    searchObjectCount: false,
-    ethnicityCount: false,
-  });
   const [error, setError] = useState(null);
 
   const location = [
@@ -30,10 +24,10 @@ const Data = ({ data, setData, date }) => {
     const fetchData = async () => {
       try {
         if (city) {
-          if (loading.overall) {
+          if (!loading.overall) {
             setData({
-              males: 0,
-              females: 0,
+              males: null,
+              females: null,
               date: '',
               searchObjectCount: [],
               outcomeWithCounts: [],
@@ -58,16 +52,18 @@ const Data = ({ data, setData, date }) => {
   
           const reader = response.body.getReader();
           let partialData = '';
+          //console.log(reader)
   
           while (true) {
             const { done, value } = await reader.read();
+            //console.log(value)
   
             if (done) {
               break;
             }
-  
-            const chunk = typeof value === 'string' ? value : new TextDecoder().decode(value);
-  
+            
+            const chunk = new TextDecoder().decode(value);
+            //console.log(chunk)
             partialData += chunk;
   
             if (chunk.endsWith('\n')) {
@@ -98,18 +94,14 @@ const Data = ({ data, setData, date }) => {
         setLoading(prevLoading => ({ ...prevLoading, overall: false }));
       }
     };
-  
     fetchData();
   }, [city]);
-  
-  
-  
   
 
   return (
     <section className='dropdown&output-section'>
       <h3 style={headerStyle}>Choose a City/Town from the dropdown or Enter your own Latitude & Longitude above</h3>
-      <p style={headerStyle}>(London will have slower load times)</p>
+      <p style={headerStyle}>(The API has an error on 2023-12 and it will fetch but display no data)</p>
       <div className='dropdown-container'>
         <Dropdown
           options={location}

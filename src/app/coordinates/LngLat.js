@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Datetime from 'react-datetime';
 import "react-datetime/css/react-datetime.css";
 
@@ -8,7 +8,7 @@ import CoordinateInput from './CoordinateInput';
 import AppInfo from './AppInfo';
 
 
-const LngLat = ({ date, handleDate, setData, setLoading, error, setError}) =>  {
+const LngLat = ({ date, handleDate, setData, error, setLoading, data }) =>  {
 
   const [lat1, setLat1] = useState("");
   const [lng1, setLng1] = useState("");
@@ -57,22 +57,9 @@ const LngLat = ({ date, handleDate, setData, setLoading, error, setError}) =>  {
     return coordinates && date;
   };
 
-  const handleSubmit = async () => {
-  try {
-    setLoading(true);
-
-    const coordinates = {
-      userLat: [lat1, lat2, lat3, lat4, lat5],
-      userLng: [lng1, lng2, lng3, lng4, lng5],
-    };
-
-    const coordsArray = {
-      userLat: Object.values(coordinates.userLat),
-      userLng: Object.values(coordinates.userLng),
-    };
-
-    if (isFormValid(coordinates)) {
-      const response = await fetch('https://policeappserver.duckdns.org:4000/policeapp/location', {
+  const handleFetch = async (coordsArray) => {
+    try {
+      const response = await fetch('http://localhost:4000/location', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -80,16 +67,78 @@ const LngLat = ({ date, handleDate, setData, setLoading, error, setError}) =>  {
         body: JSON.stringify({ coordinates: coordsArray, date: date }),
       });
 
-      const data = await response.json();
-      setData(data);
-    }
-  } catch (error) {
-    console.error('Error', error);
-  } finally {
-    setLoading(false);
-  }
-};
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
 
+      const reader = response.body.getReader();
+      let partialData = '';
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) {
+          break;
+        }
+
+        const chunk = typeof value === 'string' ? value : new TextDecoder().decode(value);
+        partialData += chunk;
+
+        if (chunk.endsWith('\n')) {
+          try {
+            const jsonData = JSON.parse(partialData.trim());
+            setData((prevData) => ({ ...prevData, ...jsonData }));
+            
+            if (jsonData.outcomeWithCounts) {
+              setLoading((prevLoading) => ({ ...prevLoading, outcomeWithCounts: false }));
+            }
+            if (jsonData.searchObjectCount) {
+              setLoading((prevLoading) => ({ ...prevLoading, searchObjectCount: false }));
+            }
+            if (jsonData.ethnicityCount) {
+              setLoading((prevLoading) => ({ ...prevLoading, ethnicityCount: false }));
+            }
+            partialData = '';
+          } catch (error) {
+            console.error('Error', error);
+          }
+        }
+      }
+    } catch (error) {
+      console.error('Error', error);
+      const responseText = await response.text();
+      console.log('Response Text:', responseText);
+    } finally {
+      setLoading((prevLoading) => ({ ...prevLoading, overall: false }));
+    }
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const coordinates = {
+        userLat: [lat1, lat2, lat3, lat4, lat5],
+        userLng: [lng1, lng2, lng3, lng4, lng5],
+      };
+
+      const coordsArray = {
+        userLat: Object.values(coordinates.userLat),
+        userLng: Object.values(coordinates.userLng),
+      };
+
+      if (isFormValid(coordinates)) {
+        setLoading((prevLoading) => ({
+          ...prevLoading,
+          overall: true,
+          outcomeWithCounts: true,
+          searchObjectCount: true,
+          ethnicityCount: true,
+        }));
+
+        await handleFetch(coordsArray);
+      }
+    } catch (error) {
+      console.error('Error', error);
+    }
+  };
 
 return (
   <>
