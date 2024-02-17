@@ -35,7 +35,7 @@ const Data = ({ data, setData, date, loading, setLoading }) => {
             });
           }
           setLoading(prevLoading => ({...prevLoading, overall: true, outcomeWithCounts: true, searchObjectCount: true, ethnicityCount: true, }));
-          const response = await fetch('http://localhost:4000/location', {
+          const response = await fetch('https://policeappserver.duckdns.org:4000/policeapp/location', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -101,7 +101,7 @@ const Data = ({ data, setData, date, loading, setLoading }) => {
   return (
     <section className='dropdown&output-section'>
       <h3 style={headerStyle}>Choose a City/Town from the dropdown or Enter your own Latitude & Longitude above</h3>
-      <p style={headerStyle}>(The API has an error on 2023-12 and it will fetch but display no data)</p>
+      <p style={headerStyle}>(2024 will not display or fetch. No data in API. London will be slower to load)</p>
       <div className='dropdown-container'>
         <Dropdown
           options={location}
@@ -109,7 +109,7 @@ const Data = ({ data, setData, date, loading, setLoading }) => {
           onChange={handleCity}
         />
       </div>
-        <Encounters data={data} date={date} error={error} loading={loading}/>
+      <Encounters data={data} date={date} error={error} loading={loading}/> 
     </section>
   );
 };
