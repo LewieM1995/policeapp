@@ -59,7 +59,7 @@ const LngLat = ({ date, handleDate, setData, error, setLoading, data }) =>  {
 
   const handleFetch = async (coordsArray) => {
     try {
-      const response = await fetch('http://localhost:4000/location', {
+      const response = await fetch('https://policeappserver.duckdns.org:4000/policeapp/location', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -6,7 +6,7 @@ import '../components/styles.css';
 
 const getDataById = async (id) => {
   try {
-    const response = await fetch(`http://localhost:4000/get-data/${id}`);
+    const response = await fetch(`https://policeappserver.duckdns.org:4000/policeapp/get-data/${id}`);
     if (!response.ok) {
       throw new Error('Request failed');
     }
