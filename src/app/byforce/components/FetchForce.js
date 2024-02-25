@@ -93,7 +93,7 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
             closeOnSelect={true}
           />
           <br/>
-          {date === "2024-01" ? <p>Date may default to 2023-11 if the API hasn't updated current month</p> : null }
+          <p>December 2023 and all dates in 2024 have not been updated on the poilce api.</p>
         </div>
         <div className="form-inside">
           <button className="btn" type="submit">Submit</button>
