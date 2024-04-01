@@ -66,7 +66,7 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
       }
     } catch (error) {
       setData('');
-      setError('Internal server error, potential issue with api')
+      setError('api has no data for this date, please try another date')
       console.error('Error:', error);
     } finally {
       setLoading(false);

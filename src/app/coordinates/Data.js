@@ -98,7 +98,7 @@ const Data = ({ data, setData, date, loading, setLoading, error, setError }) => 
         }
       } catch (error) {
         setLoading(false);
-        setClientError('Internal server error, possible issue with api');
+        setClientError('api has no data for this date, please try another date');
         console.error('Error:', error);
       } finally {
         setLoading(prevLoading => ({ ...prevLoading, overall: false }));
