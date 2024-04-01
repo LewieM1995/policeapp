@@ -48,6 +48,7 @@
 .stat-container {
     max-width: 400px;
     margin: auto auto 20px auto;
+    padding: 15px;
 }
 
 #output-wrapper .object-list {
