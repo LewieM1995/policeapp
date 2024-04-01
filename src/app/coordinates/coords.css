@@ -1,0 +1,23 @@
+.co-ords-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .coordinate-label {
+    margin-bottom: 5px;
+  }
+  
+  .coordinate-input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    width: 250px; /* Adjust width as needed */
+  }
+  
+  .coordinate-input:focus {
+    outline: none;
+    border-color: #007bff; /* Color when input is focused */
+  }
+  

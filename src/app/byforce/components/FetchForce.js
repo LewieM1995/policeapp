@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import Dropdown from "../../coordinates/Dropdown";
 import Datetime from 'react-datetime';
 import "react-datetime/css/react-datetime.css";
@@ -38,6 +38,7 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
   };
 
   const handleFunction = async (e) => {
+    setError('');
     try {
       setForceLoading(null);
       setLoading(true);
@@ -51,7 +52,10 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
           },
           body: JSON.stringify({ dropdownvalue: dropdown.value, date: date }),
         });
-        //console.log('Res:', response);
+        if (response.status === 404) {
+          setError('No data in api for this date, try another date');
+          throw new Error('API returned a 404 error');
+        }
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -61,6 +65,8 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
         setForceLoading(`${forcename} - ${(data[0].date) || data[0].datetime.slice(0,7)}`);
       }
     } catch (error) {
+      setData('');
+      setError('Internal server error, potential issue with api')
       console.error('Error:', error);
     } finally {
       setLoading(false);
@@ -93,7 +99,6 @@ const FetchForce = ({ dropdown, handleDropDown, listData, date, setDate, setData
             closeOnSelect={true}
           />
           <br/>
-          {date === "2024-01" ? <p>Date may default to 2023-11 if the API hasn't updated current month</p> : null }
         </div>
         <div className="form-inside">
           <button className="btn" type="submit">Submit</button>

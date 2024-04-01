@@ -2,7 +2,7 @@
 .co-ords-wrapper {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: repeat(1, 1fr);
     gap: 5px;
     margin: 10px 0px 10px 0px;
 }
@@ -57,9 +57,15 @@
 }
 
 .output-list {
+  width: 300px;
   list-style: none;
   padding: 10px;
 }
+
+.output-list label {
+    text-decoration: underline;
+    font-size: large;
+  }
 
 .nav-ul {
     list-style: none;
@@ -161,7 +167,6 @@
         margin: 10px;
     }
     .output-list-container {
-        text-align: center;
         margin: auto;
         padding: 10px;
     }
@@ -196,6 +201,10 @@
     }
     .dropdown-container {
         width: 25%;
+    }
+    .output-list-container {
+        width: 600px;
+        margin: auto;
     }
 }
 

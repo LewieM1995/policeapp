@@ -41,17 +41,17 @@ const calculateOutcomePercentage = (data) => {
   
     return (
       <>
-        <p>Total Outcomes: {totalOutcomes}</p>
+        <p><strong>Total Outcomes:</strong> {totalOutcomes}</p>
         <p>
-          Item Found: {trueCount} ({truePercentage.toFixed(2)}%)
+          <strong>Item Found:</strong> {trueCount} ({truePercentage.toFixed(2)}%)
         </p>
         <p>
-          Suspect Cleared: {falseCount} ({falsePercentage.toFixed(2)}%)
+          <strong>Suspect Cleared:</strong> {falseCount} ({falsePercentage.toFixed(2)}%)
         </p>
         <p>
-          Outcomes undocumented: {nullCount} ({nullOutcomesPercentage.toFixed(2)}%)
+          <strong>Outcomes undocumented:</strong> {nullCount} ({nullOutcomesPercentage.toFixed(2)}%)
         </p>
-        <p>Results from found items: {formattedOutcomes}</p>
+        <p><strong>Results from found items:</strong> {formattedOutcomes}</p>
       </>
     );
   };

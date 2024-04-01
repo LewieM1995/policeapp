@@ -49,7 +49,7 @@ const CoordinatesPage = () => {
   return (
     <main id="page-wrapper">
       <LngLat data={data} setData={setData} date={date} handleDate={handleDate} error={error} setError={setError} loading={loading} setLoading={setLoading} />
-      <Data data={data} setData={setData} date={date} loading={loading} setLoading={setLoading} />
+      <Data data={data} setData={setData} date={date} loading={loading} setLoading={setLoading} setError={setError} error={error} />
     </main>
   )
 }

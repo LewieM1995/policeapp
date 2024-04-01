@@ -4,10 +4,10 @@ import Dropdown from './Dropdown';
 import Encounters from './Encounters';
 
 
-const Data = ({ data, setData, date, loading, setLoading }) => {
+const Data = ({ data, setData, date, loading, setLoading, error, setError }) => {
   
   const [city, setCity] = useState('');
-  const [error, setError] = useState(null);
+  const [clientError, setClientError] = useState('');
 
   const location = [
     { label: 'London', lat: [51.5890, 51.3409, 51.3957, 51.6452, 51.58901], lng: [-0.4861, -0.4586, 0.3543, 0.2664, -0.4916] },
@@ -21,6 +21,8 @@ const Data = ({ data, setData, date, loading, setLoading }) => {
   };
 
   useEffect(() => {
+    setError('');
+    setClientError('');
     const fetchData = async () => {
       try {
         if (city) {
@@ -45,6 +47,12 @@ const Data = ({ data, setData, date, loading, setLoading }) => {
               date: date,
             }),
           });
+
+          if (response.status === 404) {
+            setLoading(false);
+            setClientError('No data in api for this date, try another date');
+            throw new Error('API returned a 404 error');
+          }
   
           if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -89,6 +97,8 @@ const Data = ({ data, setData, date, loading, setLoading }) => {
           }
         }
       } catch (error) {
+        setLoading(false);
+        setClientError('Internal server error, possible issue with api');
         console.error('Error:', error);
       } finally {
         setLoading(prevLoading => ({ ...prevLoading, overall: false }));
@@ -97,11 +107,11 @@ const Data = ({ data, setData, date, loading, setLoading }) => {
     fetchData();
   }, [city]);
   
-
   return (
     <section className='dropdown&output-section'>
-      <h3 style={headerStyle}>Choose a City/Town from the dropdown or Enter your own Latitude & Longitude above</h3>
-      <p style={headerStyle}>(2024 will not display or fetch. No data in API. London will be slower to load)</p>
+      <h3 style={headerStyle}>Enter a date and choose a city from the dropdown or enter your own coordinates</h3>
+      <p style={errorStyle}>{clientError}</p>
+      <p style={errorStyle}>(London will have slower load times)</p>
       <div className='dropdown-container'>
         <Dropdown
           options={location}
@@ -115,6 +125,7 @@ const Data = ({ data, setData, date, loading, setLoading }) => {
 };
 
 const headerStyle = { margin: 'auto', width: '90%', textAlign: 'center' };
+const errorStyle = { margin: "10px auto", width: '90%', textAlign: 'center', color: "red" };
 
 
 export default Data;

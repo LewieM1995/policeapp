@@ -6,8 +6,6 @@ const Home = () => {
 
   return (
     <main id="page-wrapper" style={{textAlign:'center'}}>
-      <h1 style={{fontSize:'60px', padding:'10px'}} >Lewie Marks - Demo Application </h1>
-      <br/>
       <p>This application is for demonstration purpose only</p>
       <p>The intention is to showcase knowledge of api's, react, node, mysql and dynamic rendering.</p>
       <br/>
@@ -22,4 +20,5 @@ const Home = () => {
 };
 
 export default Home;
+
 

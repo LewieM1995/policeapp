@@ -1,0 +1,33 @@
+.appinfo-container {
+    text-align: center;
+    max-width: 600px;
+    margin: auto;
+    padding: 10px;
+  }
+  
+  .appinfo-container {
+    font-weight: 500;
+    padding: 20px;
+  }
+  
+  .appinfo-container p {
+    padding: 10px;
+  }
+
+  .appinfo-container p:nth-of-type(3) {
+    color: red;
+  }
+  
+
+  .appinfo-container a {
+    color: #007bff; 
+    text-decoration: none; /* Remove underline */
+  }
+  
+  .appinfo-container a:hover {
+    text-decoration: underline; /* Underline on hover */
+  }
+  
+  .appinfo-container em {
+    font-style: italic;
+  }

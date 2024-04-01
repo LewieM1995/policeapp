@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Datetime from 'react-datetime';
 import "react-datetime/css/react-datetime.css";
 
@@ -8,7 +8,7 @@ import CoordinateInput from './CoordinateInput';
 import AppInfo from './AppInfo';
 
 
-const LngLat = ({ date, handleDate, setData, error, setLoading, data }) =>  {
+const LngLat = ({ date, handleDate, setData, error, setLoading, data, setError }) =>  {
 
   const [lat1, setLat1] = useState("");
   const [lng1, setLng1] = useState("");
@@ -16,10 +16,6 @@ const LngLat = ({ date, handleDate, setData, error, setLoading, data }) =>  {
   const [lng2, setLng2] = useState("");
   const [lat3, setLat3] = useState("");
   const [lng3, setLng3] = useState("");
-  const [lat4, setLat4] = useState("");
-  const [lng4, setLng4] = useState("");
-  const [lat5, setLat5] = useState("");
-  const [lng5, setLng5] = useState("");
 
   const handleLat1 = (v) => {
     setLat1(v.target.value)
@@ -39,22 +35,15 @@ const LngLat = ({ date, handleDate, setData, error, setLoading, data }) =>  {
   const handleLng3 = (v) => {
     setLng3(v.target.value)
   };
-  const handleLat4 = (v) => {
-    setLat4(v.target.value)
-  };
-  const handleLng4 = (v) => {
-    setLng4(v.target.value)
-  };
-  const handleLat5 = (v) => {
-    setLat5(v.target.value)
-  };
-  const handleLng5 = (v) => {
-    setLng5(v.target.value)
-  };
 
 
   const isFormValid = (coordinates) => {
-    return coordinates && date;
+    if (!coordinates || !date){
+      document.getElementById("btn btn-coords"); 
+      submitButton.disabled = true;
+    } else {
+      return coordinates && date;
+    }
   };
 
   const handleFetch = async (coordsArray) => {
@@ -66,6 +55,12 @@ const LngLat = ({ date, handleDate, setData, error, setLoading, data }) =>  {
         },
         body: JSON.stringify({ coordinates: coordsArray, date: date }),
       });
+
+      if (response.status === 404) {
+        setError('No data in api for this date, try another date');
+        setLoading(false);
+        throw new Error('API returned a 404 error');
+      }
 
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -113,10 +108,11 @@ const LngLat = ({ date, handleDate, setData, error, setLoading, data }) =>  {
   };
 
   const handleSubmit = async () => {
+    setError('')
     try {
       const coordinates = {
-        userLat: [lat1, lat2, lat3, lat4, lat5],
-        userLng: [lng1, lng2, lng3, lng4, lng5],
+        userLat: [lat1, lat2, lat3],
+        userLng: [lng1, lng2, lng3],
       };
 
       const coordsArray = {
@@ -137,34 +133,42 @@ const LngLat = ({ date, handleDate, setData, error, setLoading, data }) =>  {
       }
     } catch (error) {
       console.error('Error', error);
+      setError('1 or 3 pairs of coordinates required and make sure to select a valid date');
+    } finally {
+      setLoading((prevLoading) => ({
+        ...prevLoading,
+        overall: false,
+        outcomeWithCounts: false,
+        searchObjectCount: false,
+        ethnicityCount: false,
+      }));
     }
   };
+
+  const coordinates = [
+    { label1: "Latitude 1", value1: lat1, onChange1: handleLat1, placeholder1: "51.5890", label2: "Longitude 1", value2: lng1, onChange2: handleLng1, placeholder2: "-0.4861" },
+    { label1: "Latitude 2", value1: lat2, onChange1: handleLat2, placeholder1: "51.3409", label2: "Longitude 2", value2: lng2, onChange2: handleLng2, placeholder2: "-0.4586" },
+    { label1: "Latitude 3", value1: lat3, onChange1: handleLat3, placeholder1: "51.3957", label2: "Longitude 3", value2: lng3, onChange2: handleLng3, placeholder2: "0.3543" }
+  ];
 
 return (
   <>
     <AppInfo />
-      <div className='co-ords-wrapper'>
+    <div className='co-ords-wrapper'>
+      {coordinates.map((coordinate, index) => (
         <CoordinateInput
-          label1="Latitude 1" value1={lat1} onChange1={handleLat1} placeholder1="51.5890"
-          label2="Longitude 1" value2={lng1} onChange2={handleLng1} placeholder2="-0.4861"
+          key={index}
+          label1={coordinate.label1}
+          value1={coordinate.value1}
+          onChange1={coordinate.onChange1}
+          placeholder1={coordinate.placeholder1}
+          label2={coordinate.label2}
+          value2={coordinate.value2}
+          onChange2={coordinate.onChange2}
+          placeholder2={coordinate.placeholder2}
         />
-        <CoordinateInput
-          label1="Latitude 2" value1={lat2} onChange1={handleLat2} placeholder1="51.3409"
-          label2="Longitude 2" value2={lng2} onChange2={handleLng2} placeholder2="-0.4586"
-        />
-        <CoordinateInput
-          label1="Latitude 3" value1={lat3} onChange1={handleLat3} placeholder1="51.3957"
-          label2="Longitude 3" value2={lng3} onChange2={handleLng3} placeholder2="0.3543"
-        />
-        <CoordinateInput
-          label1="Latitude 4" value1={lat4} onChange1={handleLat4} placeholder1="51.6452"
-          label2="Longitude 4" value2={lng4} onChange2={handleLng4} placeholder2="0.2664"
-        />
-        <CoordinateInput
-          label1="Latitude 5" value1={lat5} onChange1={handleLat5} placeholder1="51.5890"
-          label2="Longitude 5" value2={lng5} onChange2={handleLng5} placeholder2="-0.4916"
-        />
-      </div>
+      ))}
+    </div>
     <div className="date-submit-container">
       {error && <div style={errorStyle}>{error}</div>}
       <div className='centered-content'>
